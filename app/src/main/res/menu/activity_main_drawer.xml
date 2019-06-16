@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+                android:id="@+id/current_order"
+                android:icon="@drawable/curentorder"
+                android:title="Current Order"/>
+        <View android:layout_width="match_parent" android:layout_height="1dp"
+              android:background="@color/colorPrimary"/>
+        <item
+                android:id="@+id/last_order"
+                android:icon="@drawable/shoppingbag"
+                android:title="Last Orders"/>
+        <View android:layout_width="match_parent" android:layout_height="1dp"
+              android:background="@color/colorPrimary"/>
+        <item
+                android:id="@+id/notification"
+                android:icon="@drawable/notificationsbellbuttonwhite"
+                android:title="Notification"/>
+        <View android:layout_width="match_parent" android:layout_height="1dp"
+              android:background="@color/colorPrimary"/>
+        <item
+                android:id="@+id/settings"
+                android:icon="@drawable/setting"
+                android:title="Settings"/>
+        <View android:layout_width="match_parent" android:layout_height="1dp"
+              android:background="@color/colorPrimary"/>
+        <item
+                android:id="@+id/tutorials"
+                android:icon="@drawable/tutorials"
+                android:title="Tutorials"/>
+    </group>
+
+    <!--<item android:title="Communicate">-->
+        <!--<menu>-->
+            <!--<item-->
+                    <!--android:id="@+id/nav_share"-->
+                    <!--android:icon="@drawable/ic_menu_share"-->
+                    <!--android:title="@string/menu_share"/>-->
+            <!--<item-->
+                    <!--android:id="@+id/nav_send"-->
+                    <!--android:icon="@drawable/ic_menu_send"-->
+                    <!--android:title="@string/menu_send"/>-->
+        <!--</menu>-->
+    <!--</item>-->
+
+</menu>

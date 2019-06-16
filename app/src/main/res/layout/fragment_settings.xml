@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:context=".menu.SettingsFragment">
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" android:weightSum="7">
+
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:paddingTop="30dp" android:layout_weight="1"
+                android:weightSum="5"
+                android:id="@+id/profile">
+            <ImageView
+                    android:src="@drawable/userprofile"
+                    android:layout_width="20dp"
+                    android:layout_height="30dp" android:id="@+id/imageView4" android:layout_weight="1"/>
+            <TextView
+                    android:text="Driver Profile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp" android:id="@+id/textView11" android:layout_weight="3"
+                    android:textSize="18sp" android:textAlignment="textStart"/>
+            <ImageView
+                    android:src="@drawable/nextscreen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp" android:id="@+id/imageView5" android:layout_weight="1"/>
+        </LinearLayout>
+
+        <View android:layout_width="match_parent" android:layout_height="1dp"
+              android:background="@color/colorPrimary"/>
+
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:paddingTop="30dp" android:layout_weight="1"
+                android:weightSum="5"
+                android:id="@+id/language">
+            <ImageView
+                    android:src="@drawable/language"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp" android:id="@+id/imageView8" android:layout_weight="1"/>
+            <TextView
+                    android:text="Language"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/textView12" android:layout_weight="2"
+                    android:textSize="18sp"/>
+            <TextView
+                    android:text="English"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/textView13" android:layout_weight="1"
+                    android:textAlignment="textEnd"/>
+            <ImageView
+                    android:src="@drawable/nextscreen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp" android:id="@+id/imageView9" android:layout_weight="1"/>
+        </LinearLayout>
+
+        <View android:layout_width="match_parent" android:layout_height="1dp"
+              android:background="@color/colorPrimary"/>
+
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:paddingTop="30dp" android:layout_weight="1"
+                android:weightSum="5"
+                android:id="@+id/faqs">
+            <ImageView
+                    android:src="@drawable/faqs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp" android:id="@+id/imageView10" android:layout_weight="1"/>
+            <TextView
+                    android:text="FAQS"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/textView14" android:layout_weight="3"
+                    android:textSize="18sp"/>
+            <ImageView
+                    android:src="@drawable/nextscreen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp" android:id="@+id/imageView11" android:layout_weight="1"/>
+        </LinearLayout>
+
+        <View android:layout_width="match_parent" android:layout_height="1dp"
+              android:background="@color/colorPrimary"/>
+
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:paddingTop="30dp" android:layout_weight="1"
+                android:weightSum="5"
+                android:id="@+id/about">
+            <ImageView
+                    android:src="@drawable/abouticon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp" android:id="@+id/imageView13" android:layout_weight="1"/>
+            <TextView
+                    android:text="About"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/textView15" android:layout_weight="3"
+                    android:textSize="18sp"/>
+            <ImageView
+                    android:src="@drawable/nextscreen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp" android:id="@+id/imageView14" android:layout_weight="1"/>
+        </LinearLayout>
+
+        <View android:layout_width="match_parent" android:layout_height="1dp"
+              android:background="@color/colorPrimary"/>
+
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:paddingTop="30dp" android:layout_weight="1"
+                android:weightSum="5"
+                android:id="@+id/policy">
+            <ImageView
+                    android:src="@drawable/privacypolice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp" android:id="@+id/imageView15" android:layout_weight="1"/>
+            <TextView
+                    android:text="Privacy Policy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/textView16" android:layout_weight="3"
+                    android:textSize="18sp"/>
+            <ImageView
+                    android:src="@drawable/nextscreen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp" android:id="@+id/imageView16" android:layout_weight="1"/>
+        </LinearLayout>
+
+        <View android:layout_width="match_parent" android:layout_height="1dp"
+              android:background="@color/colorPrimary"/>
+
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:paddingTop="30dp" android:layout_weight="1"
+                android:weightSum="5"
+                android:id="@+id/contact">
+            <ImageView
+                    android:src="@drawable/headphones"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp" android:id="@+id/imageView17" android:layout_weight="1"/>
+            <TextView
+                    android:text="Contact Us"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/textView17" android:layout_weight="3"
+                    android:textSize="18sp"/>
+            <ImageView
+                    android:src="@drawable/nextscreen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp" android:id="@+id/imageView18" android:layout_weight="1"/>
+        </LinearLayout>
+
+        <View android:layout_width="match_parent" android:layout_height="1dp"
+              android:background="@color/colorPrimary"/>
+
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:paddingTop="30dp" android:layout_weight="1"
+                android:weightSum="5"
+                android:id="@+id/logout">
+            <ImageView
+                    android:src="@drawable/abouticon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp" android:id="@+id/imageView19" android:layout_weight="1"
+                    tools:srcCompat="@drawable/logout"/>
+            <TextView
+                    android:text="Logout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/textView18" android:layout_weight="4"
+                    android:textSize="18sp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</FrameLayout>
