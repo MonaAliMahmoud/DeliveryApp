@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.core.content.ContextCompat
 import androidx.appcompat.app.AlertDialog
 import android.util.Log
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -82,7 +83,8 @@ class HomeFragment : Fragment(), OnMapReadyCallback, LocationListener, GoogleApi
     var city: String = ""
     var addresses: List<Address>? = null
 
-    var delObj : DeliveryApi? = null
+    var delObj : DeliveryApi? = DeliveryApi()
+    var pref: SharedPref? = SharedPref()
 
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -95,6 +97,16 @@ class HomeFragment : Fragment(), OnMapReadyCallback, LocationListener, GoogleApi
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+        view!!.isFocusableInTouchMode = true;
+        val requestFocus = view!!.requestFocus();
+        view!!.setOnKeyListener(object : View.OnKeyListener {
+            override fun onKey(v: View, keyCode: Int, event: KeyEvent): Boolean {
+                 if (keyCode == KeyEvent.KEYCODE_BACK) {
+
+                     return true
+                } else return false
+            }
+        })
     }
 
     override fun onCreateView(
@@ -129,20 +141,9 @@ class HomeFragment : Fragment(), OnMapReadyCallback, LocationListener, GoogleApi
 //        delObj!!.delivery.name = shared.getDeliveryObj()
         var fragment: Fragment?
 
-        val prefs = context!!.getSharedPreferences(SharedPref.SHARED_KEY,Context.MODE_PRIVATE)
-        val gson = Gson()
-        val json = prefs.getString("DeliveryObject", null)
-        if (json!=null) {
-            val obj = gson.fromJson<DeliveryApi>(json, DeliveryApi::class.java)
-            var name = obj!!.delivery.name
-            Toast.makeText(context, name, Toast.LENGTH_SHORT).show()
-        }
-
-//        var shared = SharedPref.SHARED_KEY
-//        var key: String?= shared.getString(SharedPref.SHARED_KEY, null)
-//        delObj = shared.getDeliveryObj(context!!) as DeliveryApi
-//        var name = delObj!!.delivery.name
-//        Toast.makeText(context, name, Toast.LENGTH_SHORT).show()
+        val delObj = pref!!.getDeliveryObj(context!!)
+        var nameDel = delObj!!.delivery.name
+        Toast.makeText(context, nameDel, Toast.LENGTH_SHORT).show()
 
         available.setBackgroundColor(resources.getColor(R.color.colorAccent))
         busy.setBackgroundColor(resources.getColor(R.color.colorPrimary))
@@ -188,7 +189,6 @@ class HomeFragment : Fragment(), OnMapReadyCallback, LocationListener, GoogleApi
 
         confirm_btn.setOnClickListener{
             addressLayout.visibility = View.VISIBLE
-//            searchBar.visibility = View.GONE
             confirm_btn!!.visibility = View.GONE
             getAddress()
         }

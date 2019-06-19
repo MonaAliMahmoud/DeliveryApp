@@ -1,12 +1,14 @@
 package com.iti.bago.deliveryapp.network
 
 import com.iti.bago.deliveryapp.pojo.DeliveryApi
+import com.iti.bago.deliveryapp.pojo.LastOrders
 import com.iti.bago.deliveryapp.pojo.Orders
 import com.iti.bago.deliveryapp.pojo.Login
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 interface RetrofitApi {
 
@@ -17,8 +19,6 @@ interface RetrofitApi {
     @POST("delivery/login")
     fun postToken(@Body d: Login): Call<DeliveryApi>
 
-//    @GET("OrderDeliveryHistory/{id}")
-//    fun getHistory(@Path): Call<ArrayList<Orders>>
-
-
+    @GET("OrderDeliveryHistory/{id}")
+    fun getHistory(@Path ("id") id: Int): Call<ArrayList<LastOrders>>
 }

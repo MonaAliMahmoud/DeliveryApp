@@ -23,23 +23,6 @@ object ServiceBuilder {
 //        }
 //    }
 
-    // Create OkHttp Client
-//    private val okHttp = OkHttpClient.Builder()
-//        .callTimeout(5, TimeUnit.SECONDS)
-//
-//    // Create Retrofit Builder
-//    private val builder = Retrofit.Builder().baseUrl(URL)
-//        .addConverterFactory(GsonConverterFactory.create())
-//        .client(okHttp.build())
-//
-//    // Create Retrofit Instance
-//    private val retrofit = builder.build()
-//
-//    fun <T> buildService(serviceType: Class<T>): T {
-//        return retrofit.create(serviceType)
-//    }
-//
-
     object RetrofitManager {
         private var retrofit: Retrofit? = null
         private val retrofitInstance: Retrofit?

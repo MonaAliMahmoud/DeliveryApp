@@ -2,15 +2,12 @@ package com.iti.bago.deliveryapp
 
 import android.content.Context
 import android.preference.PreferenceManager
+import android.util.Log
 import com.iti.bago.deliveryapp.pojo.DeliveryApi
 import com.google.gson.Gson
 
 
 class SharedPref {
-
-    companion object{
-        var SHARED_KEY = "Bago"
-    }
 
     fun saveDeliveryObj(deliveryApi: DeliveryApi, context: Context)
     {
@@ -18,19 +15,20 @@ class SharedPref {
         val prefsEditor = prefs.edit()
         val gson = Gson()
         val json = gson.toJson(deliveryApi)
+        Log.i("Obj", json.toString())
         prefsEditor.putString("DeliveryObject", json)
         prefsEditor.apply()
     }
 
     fun getDeliveryObj(context: Context): DeliveryApi?{
-        val prefs = context.getSharedPreferences(SHARED_KEY,Context.MODE_PRIVATE)
+        val prefs = PreferenceManager.getDefaultSharedPreferences(context)
         val gson = Gson()
-        val json = prefs.getString("DeliveryObject", null)
+        val json = prefs.getString("DeliveryObject", "")
+        var obj = gson.fromJson(json, DeliveryApi::class.java)
         if (json!=null) {
-            val obj = gson.fromJson<DeliveryApi>(json, DeliveryApi::class.java)
-            return obj
+            obj = gson.fromJson<DeliveryApi>(json, DeliveryApi::class.java)
         }
-        return null
+        return obj
     }
 
     fun setFirebaseToken(token :String?, context: Context) {

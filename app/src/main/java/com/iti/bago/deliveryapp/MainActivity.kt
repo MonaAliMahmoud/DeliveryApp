@@ -14,6 +14,7 @@ import android.widget.Toast
 import com.iti.bago.deliveryapp.menu.current_order.CurrentOrderFragment
 import com.iti.bago.deliveryapp.menu.notification.NotificationFragment
 import com.iti.bago.deliveryapp.menu.SettingsFragment
+import com.iti.bago.deliveryapp.menu.last_order.LastOrdersFragment
 import com.iti.bago.deliveryapp.tracking.TaskLoadedCallback
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener , TaskLoadedCallback {
@@ -51,11 +52,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
 
         navView.setNavigationItemSelectedListener(this)
-
-//        val sharedPrefUtil = SharedPrefUtil()
-//        val id = sharedPrefUtil.getId(this)
-//        val token = sharedPrefUtil.getToken(this)
-//        viewModel.setId_Token(id!!, token!!)
 
 //        FirebaseInstanceId.getInstance().instanceId
 //            .addOnCompleteListener(OnCompleteListener { task ->
@@ -100,7 +96,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 fragment = CurrentOrderFragment()
             }
             R.id.last_order -> {
-
+                fragment = LastOrdersFragment()
             }
             R.id.notification -> {
                 fragment = NotificationFragment()

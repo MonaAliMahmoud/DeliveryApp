@@ -1,19 +1,21 @@
-package com.iti.bago.deliveryapp.menu.current_order
+package com.iti.bago.deliveryapp.menu.last_order
 
 import android.content.Context
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.iti.bago.deliveryapp.R
+import com.iti.bago.deliveryapp.menu.current_order.ItemOrderAdapter
 import com.iti.bago.deliveryapp.pojo.ItemOrder
+import com.iti.bago.deliveryapp.pojo.Products
 
-class ItemOrderAdapter(items: ArrayList<ItemOrder>, context: Context): RecyclerView.Adapter<ItemOrderAdapter.ViewHolder>() {
+class LastOrderDetailsAdapter (product: ArrayList<Products>, context: Context): RecyclerView.Adapter<LastOrderDetailsAdapter.ViewHolder>() {
 
-    private var items: ArrayList<ItemOrder>? = items
+    private var product: ArrayList<Products>? = product
     var mcontext: Context = context
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -36,22 +38,22 @@ class ItemOrderAdapter(items: ArrayList<ItemOrder>, context: Context): RecyclerV
     }
 
     override fun getItemCount(): Int {
-        return items!!.size
+        return product!!.size
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        val item = items!![position]
+        val product = product!![position]
 
-        viewHolder.itemName.text = item.name
-        viewHolder.itemquan.text = "${item.quantity.toString()}"+"${item.price_after}"
+        viewHolder.itemName.text = product.product_name
+        viewHolder.itemquan.text = "${product.units_no.toString()}"+"${product.price_after}"
 
-        if (item.photo != "") {
-            Glide.with(this.mcontext)
-                .load(item.photo)
-                .into(viewHolder.itemImg)
-
-        }else {
-            viewHolder.itemImg.visibility= View.GONE
-        }
+//        if (product.photo != "") {
+//            Glide.with(this.mcontext)
+//                .load(item.photo)
+//                .into(viewHolder.itemImg)
+//
+//        }else {
+//            viewHolder.itemImg.visibility= View.GONE
+//        }
     }
 }

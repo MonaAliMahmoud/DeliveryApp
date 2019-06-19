@@ -64,18 +64,12 @@ class NotificationFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         activity!!.title = "Notification"
 
-//        val orderService= ServiceBuilder.buildService(RetrofitApi::class.java)
-//        val requestCall = orderService.getOrder()
-
             val service = ServiceBuilder.RetrofitManager.getInstance()?.create(RetrofitApi::class.java)
             val call: Call<ArrayList<Orders>>? = service?.getOrder()
             call?.enqueue(object: Callback<ArrayList<Orders>> {
 
             override fun onResponse(call: Call<ArrayList<Orders>>, response: Response<ArrayList<Orders>>) {
                 if (response.isSuccessful) {
-//                    if(orderList!!.isNotEmpty()) {
-//                        emptynotifyFrame.visibility = View.GONE
-//                        recycleFrame.visibility = View.VISIBLE
                     orderList = response.body()
                     layoutManager = androidx.recyclerview.widget.LinearLayoutManager(activity!!.applicationContext)
                     notification_recycle!!.layoutManager = layoutManager

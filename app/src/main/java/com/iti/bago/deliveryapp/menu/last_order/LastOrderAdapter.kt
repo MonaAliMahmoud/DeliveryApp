@@ -1,6 +1,11 @@
 package com.iti.bago.deliveryapp.menu.last_order
 
+import android.content.Context
+import android.location.Address
+import android.location.Geocoder
 import android.os.Bundle
+import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
@@ -10,23 +15,35 @@ import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.iti.bago.deliveryapp.R
 import com.iti.bago.deliveryapp.menu.current_order.CurrentOrderFragment
+import com.iti.bago.deliveryapp.pojo.LastOrders
 import com.iti.bago.deliveryapp.pojo.Orders
+import kotlinx.android.synthetic.main.fragment_home.*
+import java.util.*
+import kotlin.collections.ArrayList
 
-class LastOrderAdapter: RecyclerView.Adapter<LastOrderAdapter.ViewHolder>() {
+class LastOrderAdapter(lastOrders: ArrayList<LastOrders>, context: Context): RecyclerView.Adapter<LastOrderAdapter.ViewHolder>() {
 
-    private var orders: ArrayList<Orders>? = null
+    private var lorders: ArrayList<LastOrders>? = lastOrders
+    var mcontext: Context = context
+
+    private var geocoder: Geocoder? = null
+    private var latitude: Double = 0.toDouble()
+    private var longitude: Double = 0.toDouble()
+    var Address: String = ""
+    var city: String = ""
+    var addresses: List<Address>? = null
+
+    var storeAddress: String = ""
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         var orderDate: TextView
-        var orderTime: TextView
         var storelocation: TextView
         var customerlocation: TextView
         var status: TextView
 
         init {
             orderDate = itemView.findViewById(R.id.orderdate)
-            orderTime = itemView.findViewById(R.id.ordertime)
             storelocation = itemView.findViewById(R.id.storelocation)
             customerlocation = itemView.findViewById(R.id.customerlocation)
             status = itemView.findViewById(R.id.status)
@@ -36,18 +53,15 @@ class LastOrderAdapter: RecyclerView.Adapter<LastOrderAdapter.ViewHolder>() {
                 val fragment: Fragment?
                 val activity = v.context as AppCompatActivity
                 val arguments = Bundle()
-                val order = orders!![position]
-                val cust = order.customer[0]
-                val item = order.item_order
-                arguments.putString("supermarket_name", order.supermarket_name)
-                arguments.putString("supermarket_address", order.supermarket_address)
-                arguments.putString("customer_address", cust.address)
-                arguments.putString("customer_phone_number", cust.phone_number)
-                arguments.putString("customer_name", cust.name)
-//                arguments.putString("payment", order.payment_type)
-                arguments.putSerializable("itemOrder", item)
+                val order = lorders!![position]
+                val product = order.products
+                arguments.putString("store_name", order.supermaeket_name)
+                arguments.putString("store_address", storeAddress)
+                arguments.putString("payment_type", order.payment_type)
+                arguments.putString("customer_address", order.customer_address)
+                arguments.putSerializable("product", product)
                 fragment = CurrentOrderFragment()
-                fragment!!.setArguments(arguments)
+                fragment.setArguments(arguments)
                 val frgMng: FragmentManager = activity.supportFragmentManager
                 val frgTran = frgMng.beginTransaction()
                 frgTran.replace(R.id.content_frame, fragment).addToBackStack(null).commit()
@@ -56,14 +70,30 @@ class LastOrderAdapter: RecyclerView.Adapter<LastOrderAdapter.ViewHolder>() {
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, p1: Int): ViewHolder {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+        val v = LayoutInflater.from(viewGroup.context)
+            .inflate(R.layout.last_order_card, viewGroup, false)
+        return ViewHolder(v)    }
 
     override fun getItemCount(): Int {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return lorders!!.size
     }
 
-    override fun onBindViewHolder(p0: ViewHolder, p1: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
+        val order = lorders!![position]
+
+        latitude = order.lat_src
+        longitude = order.lng_src
+        geocoder = Geocoder(mcontext, Locale.getDefault())
+        addresses = geocoder!!.getFromLocation(latitude, longitude, 1)
+        city = addresses!![0].locality
+        val state = addresses!![0].adminArea
+        val country = addresses!![0].countryName
+        val postalCode = addresses!![0].postalCode
+        Log.i("geocoders ", Address + city + state + country + postalCode)
+        storeAddress = "$Address"+"$city"+"$state"+"$country"
+        viewHolder.orderDate.text = order.created_at
+        viewHolder.storelocation.text = "$Address"+"$city"+"$state"+"$country"
+        viewHolder.customerlocation.text = order.customer_address
+        viewHolder.status.text = order.status
     }
 }
