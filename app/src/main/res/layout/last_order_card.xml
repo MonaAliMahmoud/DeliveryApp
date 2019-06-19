@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/cardView"
+        app:cardCornerRadius="5dp"
+        android:layout_margin="15dp"
+        android:paddingStart="10dp"
+        android:foreground="?selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true">
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:weightSum="3">
+
+
+
+        <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" app:srcCompat="@drawable/lastorderroad"
+                android:id="@+id/imageView12" android:padding="10dp"/>
+
+        <View android:layout_width="match_parent" android:layout_height="1dp"
+              android:background="@color/colorPrimary" android:id="@+id/view3"/>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:padding="8dp">
+            <TextView
+                    android:text="Date and Time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textStyle="bold" android:textAlignment="textStart"
+                    android:paddingStart="20dp"
+                    android:paddingTop="5dp"/>
+            <TextView
+                    android:text="hi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/orderdate" android:layout_weight="1"
+                    android:textSize="16sp"
+                    android:textAlignment="center"
+                    android:paddingStart="20dp"
+                    android:paddingTop="10dp"/>
+            <TextView
+                    android:text="TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/ordertime" android:layout_weight="1"
+                    android:textSize="16dp"/>
+        </LinearLayout>
+        <View android:layout_width="match_parent" android:layout_height="1dp"
+              android:background="@color/colorPrimary"/>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+            <ImageView
+                    app:srcCompat="@drawable/loctioncircle"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:id="@+id/imageView2"
+                    android:layout_margin="12dp"/>
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:background="@color/colorWhite"
+                    android:id="@+id/addressLayout"
+                    android:layout_height="wrap_content" android:weightSum="5"
+                    android:orientation="vertical">
+                <TextView
+                        android:text="PickUpUp Location"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp" android:textAlignment="textStart"
+                        android:layout_margin="10dp"/>
+                <TextView
+                        android:text="TextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/storelocation"
+                        android:textSize="16sp" android:textAlignment="textStart"
+                        android:layout_margin="10dp"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+            <ImageView
+                    app:srcCompat="@drawable/ellipse_1"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_margin="12dp"/>
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:background="@color/colorWhite"
+                    android:layout_height="wrap_content" android:weightSum="5"
+                    android:orientation="vertical">
+                <TextView
+                        android:text="Drop Down Location"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp" android:textAlignment="textStart"
+                        android:layout_margin="10dp"/>
+                <TextView
+                        android:text="TextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/customerlocation"
+                        android:textSize="16sp" android:textAlignment="textStart"
+                        android:layout_margin="10dp"/>
+            </LinearLayout>
+        </LinearLayout>
+        <View android:layout_width="match_parent" android:layout_height="1dp"
+              android:background="@color/colorPrimary" />
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+            <ImageView
+                    app:srcCompat="@drawable/confirm"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_margin="12dp"/>
+            <TextView
+                    android:text="Completed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/status" android:textSize="18sp"
+                    android:textStyle="bold" android:textAlignment="textStart"
+                    android:paddingStart="20dp"
+                    android:paddingTop="5dp"/>
+        </LinearLayout>
+        </LinearLayout>
+
+</androidx.cardview.widget.CardView>

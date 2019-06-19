@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "707744203549",
+    "firebase_url": "https://bagodelivery.firebaseio.com",
+    "project_id": "bagodelivery",
+    "storage_bucket": "bagodelivery.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:707744203549:android:a5a895280973c0d2",
+        "android_client_info": {
+          "package_name": "com.iti.bago.deliveryapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "707744203549-of17ioldrr1fmjlnv9nqdmongqhv6uuq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.iti.bago.deliveryapp",
+            "certificate_hash": "40d94f3f594538c4db9fc9605b4376a0b1758a84"
+          }
+        },
+        {
+          "client_id": "707744203549-s5au8n16hv5b434au8t9nhh08opd39vp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwurXRWhr98wJ5crnFbDiraLTVwpvH8xs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "707744203549-s5au8n16hv5b434au8t9nhh08opd39vp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

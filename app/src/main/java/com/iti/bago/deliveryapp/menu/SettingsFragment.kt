@@ -3,17 +3,14 @@ package com.iti.bago.deliveryapp.menu
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
 import com.iti.bago.deliveryapp.R
 import com.iti.bago.deliveryapp.menu.current_order.CurrentOrderFragment
-import com.iti.bago.deliveryapp.settings.AboutFragment
-import com.iti.bago.deliveryapp.settings.ContactFragment
-import com.iti.bago.deliveryapp.settings.FAQSFragment
-import com.iti.bago.deliveryapp.settings.PolicyFragment
+import com.iti.bago.deliveryapp.settings.*
 import kotlinx.android.synthetic.main.fragment_settings.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -58,7 +55,7 @@ class SettingsFragment : Fragment(), View.OnClickListener {
         activity!!.title = "Settings"
 
         profile.setOnClickListener(this)
-        language.setOnClickListener(this)
+//        language.setOnClickListener(this)
         faqs.setOnClickListener(this)
         about.setOnClickListener(this)
         policy.setOnClickListener(this)
@@ -71,11 +68,11 @@ class SettingsFragment : Fragment(), View.OnClickListener {
 
         when (v!!.id) {
             R.id.profile -> {
-                fragment = CurrentOrderFragment()
+                fragment = ProfileFragment()
             }
-            R.id.language -> {
-
-            }
+//            R.id.language -> {
+//
+//            }
             R.id.faqs -> {
                 fragment = FAQSFragment()
             }

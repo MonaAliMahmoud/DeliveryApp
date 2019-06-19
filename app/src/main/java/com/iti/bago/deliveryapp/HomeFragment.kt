@@ -4,13 +4,15 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
+import android.location.Address
+import android.location.Geocoder
 import android.location.Location
 import android.net.Uri
 import android.os.Bundle
-import android.support.v4.app.ActivityCompat
-import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
-import android.support.v7.app.AlertDialog
+import androidx.core.app.ActivityCompat
+import androidx.fragment.app.Fragment
+import androidx.core.content.ContextCompat
+import androidx.appcompat.app.AlertDialog
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -28,9 +30,12 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.AutocompletePrediction
 import com.google.android.libraries.places.api.net.PlacesClient
+import com.google.gson.Gson
+import com.iti.bago.deliveryapp.pojo.DeliveryApi
 import com.iti.bago.deliveryapp.tracking.BusyFragment
 import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.status_buttons.*
+import kotlinx.android.synthetic.main.state_buttons.*
+import java.util.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -67,9 +72,17 @@ class HomeFragment : Fragment(), OnMapReadyCallback, LocationListener, GoogleApi
 
     private var mLastKnownLocation: Location? = null
     private var locationCallback: LocationCallback? = null
-
+    private var geocoder: Geocoder? = null
     private var mapView: View? = null
     private var DEFAULT_ZOOM = 15f
+
+    private var latitude: Double = 0.toDouble()
+    private var longitude: Double = 0.toDouble()
+    var Address: String = ""
+    var city: String = ""
+    var addresses: List<Address>? = null
+
+    var delObj : DeliveryApi? = null
 
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -89,6 +102,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback, LocationListener, GoogleApi
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+
         mapView = inflater.inflate(R.layout.fragment_home, container, false)
         mapFragment = childFragmentManager.findFragmentById(R.id.homeMap) as SupportMapFragment
         if (mapFragment == null){
@@ -112,7 +126,23 @@ class HomeFragment : Fragment(), OnMapReadyCallback, LocationListener, GoogleApi
         super.onViewCreated(view, savedInstanceState)
         activity!!.title = "Home"
 
+//        delObj!!.delivery.name = shared.getDeliveryObj()
         var fragment: Fragment?
+
+        val prefs = context!!.getSharedPreferences(SharedPref.SHARED_KEY,Context.MODE_PRIVATE)
+        val gson = Gson()
+        val json = prefs.getString("DeliveryObject", null)
+        if (json!=null) {
+            val obj = gson.fromJson<DeliveryApi>(json, DeliveryApi::class.java)
+            var name = obj!!.delivery.name
+            Toast.makeText(context, name, Toast.LENGTH_SHORT).show()
+        }
+
+//        var shared = SharedPref.SHARED_KEY
+//        var key: String?= shared.getString(SharedPref.SHARED_KEY, null)
+//        delObj = shared.getDeliveryObj(context!!) as DeliveryApi
+//        var name = delObj!!.delivery.name
+//        Toast.makeText(context, name, Toast.LENGTH_SHORT).show()
 
         available.setBackgroundColor(resources.getColor(R.color.colorAccent))
         busy.setBackgroundColor(resources.getColor(R.color.colorPrimary))
@@ -143,9 +173,9 @@ class HomeFragment : Fragment(), OnMapReadyCallback, LocationListener, GoogleApi
         busy.setOnClickListener{
             it.setBackgroundColor(resources.getColor(R.color.colorAccent))
             offline.setBackgroundColor(resources.getColor(R.color.colorPrimary))
-//                offline.isClickable = false
+            offline.isClickable = false
             available.setBackgroundColor(resources.getColor(R.color.colorPrimary))
-//                available.isClickable = false
+            available.isClickable = false
             fragment = BusyFragment()
             if (fragment != null){
                 val frgMng = fragmentManager
@@ -155,11 +185,27 @@ class HomeFragment : Fragment(), OnMapReadyCallback, LocationListener, GoogleApi
         }
 
         addressLayout.visibility = View.GONE
-        confirm_btn!!.setOnClickListener{
+
+        confirm_btn.setOnClickListener{
             addressLayout.visibility = View.VISIBLE
-            searchBar.visibility = View.GONE
+//            searchBar.visibility = View.GONE
             confirm_btn!!.visibility = View.GONE
+            getAddress()
         }
+    }
+
+    private fun getAddress() {
+        latitude = mLastKnownLocation!!.latitude
+        longitude = mLastKnownLocation!!.longitude
+        geocoder = Geocoder(activity!!.applicationContext, Locale.getDefault())
+        addresses = geocoder!!.getFromLocation(latitude, longitude, 1)
+        Address = addresses!![0].getAddressLine(0)
+        city = addresses!![0].locality
+        val state = addresses!![0].adminArea
+        val country = addresses!![0].countryName
+        val postalCode = addresses!![0].postalCode
+        Log.i("geocoders ", Address + city + state + country + postalCode)
+        address.text = "$Address"+"$city"+"$state"+"$country"
     }
 
     private fun getLocationPermission() {

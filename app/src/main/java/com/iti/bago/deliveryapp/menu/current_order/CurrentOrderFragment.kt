@@ -3,23 +3,15 @@ package com.iti.bago.deliveryapp.menu.current_order
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.iti.bago.deliveryapp.R
-import com.iti.bago.deliveryapp.menu.RetrofitApi
-import com.iti.bago.deliveryapp.menu.ServiceBuilder
-import com.iti.bago.deliveryapp.menu.pojo.ItemOrder
-import com.iti.bago.deliveryapp.menu.pojo.Orders
+import com.iti.bago.deliveryapp.pojo.ItemOrder
+import com.iti.bago.deliveryapp.tracking.BusyFragment
 import kotlinx.android.synthetic.main.fragment_current_order.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -36,15 +28,22 @@ private const val ARG_PARAM2 = "param2"
  *
  */
 class CurrentOrderFragment : Fragment() {
+
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
 
-    private var layoutManager: RecyclerView.LayoutManager? = null
-    private var adapter: RecyclerView.Adapter<ItemOrderAdapter.ViewHolder>? = null
+    private var layoutManager: androidx.recyclerview.widget.RecyclerView.LayoutManager? = null
+    private var adapter: androidx.recyclerview.widget.RecyclerView.Adapter<ItemOrderAdapter.ViewHolder>? = null
 
     var itemList: ArrayList<ItemOrder>? = null
+
+    var supermarketAddress: String? = ""
+    var supermarketName: String? = ""
+    var customerAddress: String? = ""
+    var customerPhone: String? = ""
+    var customerName: String? = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,31 +65,56 @@ class CurrentOrderFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         activity!!.title = "Current Order"
 
-        val orderService= ServiceBuilder.buildService(RetrofitApi::class.java)
-        val requestCall = orderService.getOrder()
+        val arguments = arguments
 
-        requestCall.enqueue(object: Callback<java.util.ArrayList<Orders>> {
+        if(arguments != null) {
+            supermarketName = arguments.getString("supermarket_name")
+            supermarketAddress = arguments.getString("supermarket_address")
+            customerAddress = arguments.getString("customer_address")
+            customerPhone = arguments.getString("customer_phone_number")
+            customerName = arguments.getString("customer_name")
 
-            override fun onResponse(call: Call<ArrayList<Orders>>, response: Response<ArrayList<Orders>>) {
-                if (response.isSuccessful) {
-//                    itemList= response.body().item_order // Use it or ignore it
-                    layoutManager = LinearLayoutManager(activity!!.applicationContext)
-                    item_recycle!!.layoutManager = layoutManager
-                    item_recycle!!.itemAnimator = DefaultItemAnimator()
-                    adapter = ItemOrderAdapter(itemList!!, context!!)
-                    item_recycle!!.adapter = adapter
+//            val paymentType = arguments.getString("payment")
+            val items = arguments.getSerializable("itemOrder") as ArrayList<ItemOrder>
 
-                    Toast.makeText(context, "Successfully Added", Toast.LENGTH_SHORT).show()
+            Log.i("Items", items.toString())
 
-                } else {
-                    Toast.makeText(context, "Failed to add item", Toast.LENGTH_SHORT).show()
-                }
-            }
+            market_name.text = supermarketName
+            market_address.text = supermarketAddress
+            customer_address.text = customerAddress
+            payment.text = ""
+            time_date.text = ""
+            itemList = items
 
-            override fun onFailure(call: Call<ArrayList<Orders>>, t: Throwable) {
-                Toast.makeText(context, "Failed to connect server", Toast.LENGTH_SHORT).show()
-            }
-        })
+            layoutManager = androidx.recyclerview.widget.LinearLayoutManager(activity!!.applicationContext)
+            item_recycle!!.layoutManager = layoutManager
+            item_recycle!!.itemAnimator = androidx.recyclerview.widget.DefaultItemAnimator()
+            adapter = ItemOrderAdapter(items, activity!!.applicationContext)
+            item_recycle!!.adapter = adapter
+        }
+        else{
+            market_name.text = ""
+            market_address.text = ""
+            customer_address.text = ""
+            payment.text = ""
+            time_date.text = ""
+            itemList
+        }
+
+        startTrip!!.setOnClickListener{
+            val fragment: Fragment?
+            val arguments = Bundle()
+            arguments.putString("supermarket_name", supermarketName)
+            arguments.putString("supermarket_address", supermarketAddress)
+            arguments.putString("customer_phone_number", customerPhone)
+            arguments.putString("customer_name", customerName)
+            arguments.putString("customer_address", customerAddress)
+            fragment = BusyFragment()
+            fragment.setArguments(arguments)
+            val frgMng = fragmentManager
+            val frgTran = frgMng!!.beginTransaction()
+            frgTran.replace(R.id.content_frame, fragment).addToBackStack(null).commit()
+        }
     }
 
     // TODO: Rename method, update argument and hook method into UI event

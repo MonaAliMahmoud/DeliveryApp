@@ -7,25 +7,27 @@
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" android:weightSum="7">
+            android:layout_height="match_parent"
+            android:background="@color/colorWhite"
+            android:weightSum="7">
 
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:paddingTop="30dp" android:layout_weight="1"
+                android:layout_height="wrap_content" android:paddingTop="30dp"
                 android:weightSum="5"
-                android:id="@+id/profile">
+                android:id="@+id/profile" android:layout_margin="5dp">
             <ImageView
-                    android:src="@drawable/userprofile"
+                    app:srcCompat="@drawable/userprofile"
                     android:layout_width="20dp"
-                    android:layout_height="30dp" android:id="@+id/imageView4" android:layout_weight="1"/>
+                    android:layout_height="20dp" android:id="@+id/imageView4" android:layout_weight="1"/>
             <TextView
                     android:text="Driver Profile"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp" android:id="@+id/textView11" android:layout_weight="3"
-                    android:textSize="18sp" android:textAlignment="textStart"/>
+                    android:textSize="16sp" android:textAlignment="textStart"/>
             <ImageView
-                    android:src="@drawable/nextscreen"
+                    app:srcCompat="@drawable/nextscreen"
                     android:layout_width="wrap_content"
                     android:layout_height="20dp" android:id="@+id/imageView5" android:layout_weight="1"/>
         </LinearLayout>
@@ -33,31 +35,31 @@
         <View android:layout_width="match_parent" android:layout_height="1dp"
               android:background="@color/colorPrimary"/>
 
-        <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:paddingTop="30dp" android:layout_weight="1"
-                android:weightSum="5"
-                android:id="@+id/language">
-            <ImageView
-                    android:src="@drawable/language"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp" android:id="@+id/imageView8" android:layout_weight="1"/>
-            <TextView
-                    android:text="Language"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/textView12" android:layout_weight="2"
-                    android:textSize="18sp"/>
-            <TextView
-                    android:text="English"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/textView13" android:layout_weight="1"
-                    android:textAlignment="textEnd"/>
-            <ImageView
-                    android:src="@drawable/nextscreen"
-                    android:layout_width="wrap_content"
-                    android:layout_height="20dp" android:id="@+id/imageView9" android:layout_weight="1"/>
-        </LinearLayout>
+        <!--<LinearLayout-->
+        <!--android:orientation="horizontal"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content" android:paddingTop="30dp"-->
+        <!--android:weightSum="5"-->
+        <!--android:id="@+id/language">-->
+        <!--<ImageView-->
+        <!--android:src="@drawable/language"-->
+        <!--android:layout_width="30dp"-->
+        <!--android:layout_height="30dp" android:id="@+id/imageView8" android:layout_weight="1"/>-->
+        <!--<TextView-->
+        <!--android:text="Language"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content" android:id="@+id/textView12" android:layout_weight="2"-->
+        <!--android:textSize="18sp"/>-->
+        <!--<TextView-->
+        <!--android:text="English"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content" android:id="@+id/textView13" android:layout_weight="1"-->
+        <!--android:textAlignment="textEnd"/>-->
+        <!--<ImageView-->
+        <!--android:src="@drawable/nextscreen"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="20dp" android:id="@+id/imageView9" android:layout_weight="1"/>-->
+        <!--</LinearLayout>-->
 
         <View android:layout_width="match_parent" android:layout_height="1dp"
               android:background="@color/colorPrimary"/>
@@ -65,20 +67,20 @@
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:paddingTop="30dp" android:layout_weight="1"
+                android:layout_height="wrap_content" android:paddingTop="30dp"
                 android:weightSum="5"
-                android:id="@+id/faqs">
+                android:id="@+id/faqs" android:layout_margin="5dp">
             <ImageView
-                    android:src="@drawable/faqs"
+                    app:srcCompat="@drawable/faqs"
                     android:layout_width="wrap_content"
-                    android:layout_height="30dp" android:id="@+id/imageView10" android:layout_weight="1"/>
+                    android:layout_height="20dp" android:id="@+id/imageView10" android:layout_weight="1"/>
             <TextView
                     android:text="FAQS"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/textView14" android:layout_weight="3"
-                    android:textSize="18sp"/>
+                    android:textSize="16sp"/>
             <ImageView
-                    android:src="@drawable/nextscreen"
+                    app:srcCompat="@drawable/nextscreen"
                     android:layout_width="wrap_content"
                     android:layout_height="20dp" android:id="@+id/imageView11" android:layout_weight="1"/>
         </LinearLayout>
@@ -89,20 +91,20 @@
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:paddingTop="30dp" android:layout_weight="1"
+                android:layout_height="wrap_content" android:paddingTop="30dp"
                 android:weightSum="5"
-                android:id="@+id/about">
+                android:id="@+id/about" android:layout_margin="5dp">
             <ImageView
-                    android:src="@drawable/abouticon"
+                    app:srcCompat="@drawable/abouticon"
                     android:layout_width="wrap_content"
-                    android:layout_height="30dp" android:id="@+id/imageView13" android:layout_weight="1"/>
+                    android:layout_height="20dp" android:id="@+id/imageView13" android:layout_weight="1"/>
             <TextView
                     android:text="About"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/textView15" android:layout_weight="3"
-                    android:textSize="18sp"/>
+                    android:textSize="16sp"/>
             <ImageView
-                    android:src="@drawable/nextscreen"
+                    app:srcCompat="@drawable/nextscreen"
                     android:layout_width="wrap_content"
                     android:layout_height="20dp" android:id="@+id/imageView14" android:layout_weight="1"/>
         </LinearLayout>
@@ -113,20 +115,20 @@
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:paddingTop="30dp" android:layout_weight="1"
+                android:layout_height="wrap_content" android:paddingTop="30dp"
                 android:weightSum="5"
-                android:id="@+id/policy">
+                android:id="@+id/policy" android:layout_margin="5dp">
             <ImageView
-                    android:src="@drawable/privacypolice"
+                    app:srcCompat="@drawable/privacypolice"
                     android:layout_width="wrap_content"
-                    android:layout_height="30dp" android:id="@+id/imageView15" android:layout_weight="1"/>
+                    android:layout_height="20dp" android:id="@+id/imageView15" android:layout_weight="1"/>
             <TextView
                     android:text="Privacy Policy"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/textView16" android:layout_weight="3"
-                    android:textSize="18sp"/>
+                    android:textSize="16sp"/>
             <ImageView
-                    android:src="@drawable/nextscreen"
+                    app:srcCompat="@drawable/nextscreen"
                     android:layout_width="wrap_content"
                     android:layout_height="20dp" android:id="@+id/imageView16" android:layout_weight="1"/>
         </LinearLayout>
@@ -137,20 +139,20 @@
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:paddingTop="30dp" android:layout_weight="1"
+                android:layout_height="wrap_content" android:paddingTop="30dp"
                 android:weightSum="5"
-                android:id="@+id/contact">
+                android:id="@+id/contact" android:layout_margin="5dp">
             <ImageView
-                    android:src="@drawable/headphones"
+                    app:srcCompat="@drawable/headphones"
                     android:layout_width="wrap_content"
-                    android:layout_height="30dp" android:id="@+id/imageView17" android:layout_weight="1"/>
+                    android:layout_height="20dp" android:id="@+id/imageView17" android:layout_weight="1"/>
             <TextView
                     android:text="Contact Us"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/textView17" android:layout_weight="3"
-                    android:textSize="18sp"/>
+                    android:textSize="16sp"/>
             <ImageView
-                    android:src="@drawable/nextscreen"
+                    app:srcCompat="@drawable/nextscreen"
                     android:layout_width="wrap_content"
                     android:layout_height="20dp" android:id="@+id/imageView18" android:layout_weight="1"/>
         </LinearLayout>
@@ -161,19 +163,19 @@
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:paddingTop="30dp" android:layout_weight="1"
+                android:layout_height="wrap_content" android:paddingTop="30dp"
                 android:weightSum="5"
-                android:id="@+id/logout">
+                android:id="@+id/logout" android:layout_margin="5dp">
             <ImageView
-                    android:src="@drawable/abouticon"
+                    app:srcCompat="@drawable/abouticon"
                     android:layout_width="wrap_content"
-                    android:layout_height="30dp" android:id="@+id/imageView19" android:layout_weight="1"
+                    android:layout_height="20dp" android:id="@+id/imageView19" android:layout_weight="1"
                     tools:srcCompat="@drawable/logout"/>
             <TextView
                     android:text="Logout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/textView18" android:layout_weight="4"
-                    android:textSize="18sp"/>
+                    android:textSize="16sp"/>
 
         </LinearLayout>
 

@@ -2,20 +2,17 @@ package com.iti.bago.deliveryapp.tracking
 
 import android.Manifest
 import android.content.Context
-import android.content.pm.PackageManager
 import android.content.pm.PackageManager.PERMISSION_GRANTED
-import android.graphics.Bitmap
-import android.graphics.drawable.BitmapDrawable
 import android.location.Location
 import android.net.Uri
 import android.os.AsyncTask
 import android.os.Build
 import android.os.Bundle
 import android.os.Looper
-import android.support.v4.app.ActivityCompat
-import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
-import android.support.v7.app.AlertDialog
+import androidx.core.app.ActivityCompat
+import androidx.fragment.app.Fragment
+import androidx.core.content.ContextCompat
+import androidx.appcompat.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,7 +25,10 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
 import com.iti.bago.deliveryapp.HomeFragment
 import com.iti.bago.deliveryapp.R
-import kotlinx.android.synthetic.main.status_buttons.*
+import kotlinx.android.synthetic.main.fragment_busy.*
+import kotlinx.android.synthetic.main.fragment_current_order.market_address
+import kotlinx.android.synthetic.main.fragment_current_order.market_name
+import kotlinx.android.synthetic.main.state_buttons.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -64,7 +64,13 @@ class BusyFragment : Fragment(), OnMapReadyCallback, TaskLoadedCallback {
     private lateinit var mLastLocation: Location
     private var mMarker: Marker? = null
 
-    private var DEFAULT_ZOOM = 15f
+    private var DEFAULT_ZOOM = 14f
+
+    var storeName: String? = ""
+    var storeAddress: String? = ""
+    var customerAddress: String? = ""
+    var customerPhone: String? = ""
+    var customerName: String? = ""
 
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -117,6 +123,27 @@ class BusyFragment : Fragment(), OnMapReadyCallback, TaskLoadedCallback {
 
         var fragment: Fragment?
 
+        val arguments = arguments
+
+        if(arguments != null) {
+            storeName = arguments.getString("supermarket_name")
+            storeAddress = arguments.getString("supermarket_address")
+            customerPhone = arguments.getString("customer_phone_number")
+            customerAddress = arguments.getString("customer_address")
+            customerName = arguments.getString("customer_name")
+
+//            val paymentType = arguments.getString("payment")
+
+            marketname.text = storeName
+            marketaddress.text = storeAddress
+            customer_phone.text = customerPhone
+        }
+        else {
+            marketname.text = ""
+            marketaddress.text = ""
+            customer_phone.text = ""
+        }
+
         busy.setBackgroundColor(resources.getColor(R.color.colorAccent))
         available.setBackgroundColor(resources.getColor(R.color.colorPrimary))
         offline.setBackgroundColor(resources.getColor(R.color.colorPrimary))
@@ -153,9 +180,22 @@ class BusyFragment : Fragment(), OnMapReadyCallback, TaskLoadedCallback {
         busy.setOnClickListener{
             it.setBackgroundColor(resources.getColor(R.color.colorAccent))
             offline.setBackgroundColor(resources.getColor(R.color.colorPrimary))
-//                offline.isClickable = false
+            offline.isClickable = false
             available.setBackgroundColor(resources.getColor(R.color.colorPrimary))
-//                available.isClickable = false
+            available.isClickable = false
+        }
+
+        confirm_arrive.setOnClickListener {
+            val fragment: Fragment?
+            val arguments = Bundle()
+            arguments.putString("customer_name", customerName)
+            arguments.putString("customer_address", customerAddress)
+            arguments.putString("customer_phone_number", customerPhone)
+            fragment = NavigateToCustomerFragment()
+            fragment.setArguments(arguments)
+            val frgMng = fragmentManager
+            val frgTran = frgMng!!.beginTransaction()
+            frgTran.replace(R.id.content_frame, fragment).addToBackStack(null).commit()
         }
     }
 
@@ -240,19 +280,10 @@ class BusyFragment : Fragment(), OnMapReadyCallback, TaskLoadedCallback {
                 latitude = mLastLocation.latitude
                 longitude = mLastLocation.longitude
 
-                val height = 130
-                val width = 130
-                val bitMapDraw: BitmapDrawable = resources.getDrawable(R.drawable.group430) as BitmapDrawable
-                val b: Bitmap = bitMapDraw.bitmap
-                val smallMarker: Bitmap = Bitmap.createScaledBitmap(b, width, height, false)
-                val latLng = LatLng(latitude, longitude)
                 val latlng2= LatLng(31.181721, 29.885290)
-//                val markerOptions = MarkerOptions().position(latLng).title("You are here")
-//                    .icon(BitmapDescriptorFactory.fromBitmap(smallMarker))
-//                mMarker = mMap!!.addMarker(markerOptions)
 
                 val place1 = MarkerOptions().position(LatLng(31.181721, 29.885290)).title("location 1")
-                    .icon(BitmapDescriptorFactory.fromBitmap(smallMarker))
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.placeholderfilledpoint))
 
                 mMarker = mMap!!.addMarker(place1)
                 val place2 = MarkerOptions().position(LatLng(31.201237, 29.900850)).title("location 2")

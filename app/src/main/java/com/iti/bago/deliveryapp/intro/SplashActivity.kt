@@ -1,16 +1,16 @@
-package com.iti.bago.deliveryapp
+package com.iti.bago.deliveryapp.intro
 
-import android.content.Context
-import android.content.Intent
 import android.content.pm.PackageManager
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import android.support.v4.app.ActivityCompat
+import android.os.PersistableBundle
+import androidx.core.app.ActivityCompat
+import com.iti.bago.deliveryapp.R
 
 class SplashActivity : AppCompatActivity() {
 
-    private val SPLASH_TIME_OUT:Long=5000 // 2 sec
+    private val SPLASH_TIME_OUT:Long=2000 // 2 sec
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,9 +24,9 @@ class SplashActivity : AppCompatActivity() {
             )
         }
 
-//        var pref : PrefManager? =null
-//        pref=PrefManager(this)
-
+//        var pref : SharedPref? =null
+//        pref=SharedPref()
+//
 //        val isFirstRun =pref?.getIsFirst()
 
 
@@ -48,10 +48,22 @@ class SplashActivity : AppCompatActivity() {
 ////                Toast.makeText(this, "First Run", Toast.LENGTH_LONG)
 ////                    .show()
 //            }else{
-                startActivity(Intent(this, MainActivity::class.java))
-
+//                startActivity(Intent(this, MainActivity::class.java))
+//
                 // close this activity
-                finish()
+//                finish()
+
+            val loginFragment = LoginFragment()
+            val fragmentTransaction = supportFragmentManager.beginTransaction()
+            fragmentTransaction.add(R.id.intro_frame, loginFragment)
+            fragmentTransaction.commitAllowingStateLoss()
+
+//            startActivity(Intent(this, LoginActivity::class.java))
+
         }, SPLASH_TIME_OUT)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?, outPersistentState: PersistableBundle?) {
+//        super.onSaveInstanceState(outState, outPersistentState)
     }
 }

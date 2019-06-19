@@ -3,18 +3,15 @@ package com.iti.bago.deliveryapp.menu.notification
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.iti.bago.deliveryapp.R
-import com.iti.bago.deliveryapp.menu.RetrofitApi
-import com.iti.bago.deliveryapp.menu.ServiceBuilder
-import com.iti.bago.deliveryapp.menu.pojo.Orders
+import com.iti.bago.deliveryapp.network.RetrofitApi
+import com.iti.bago.deliveryapp.network.ServiceBuilder
+import com.iti.bago.deliveryapp.pojo.Orders
 import kotlinx.android.synthetic.main.fragment_notification.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -40,10 +37,12 @@ class NotificationFragment : Fragment() {
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
 
-    private var layoutManager: RecyclerView.LayoutManager? = null
-    private var adapter: RecyclerView.Adapter<NotificationAdapter.ViewHolder>? = null
+    private var layoutManager: androidx.recyclerview.widget.RecyclerView.LayoutManager? = null
+    private var adapter: androidx.recyclerview.widget.RecyclerView.Adapter<NotificationAdapter.ViewHolder>? = null
 
     var orderList: ArrayList<Orders>? = null
+
+    var emptylayoutFlag : Boolean = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,35 +64,52 @@ class NotificationFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         activity!!.title = "Notification"
 
-        val orderService= ServiceBuilder.buildService(RetrofitApi::class.java)
-        val requestCall = orderService.getOrder()
+//        val orderService= ServiceBuilder.buildService(RetrofitApi::class.java)
+//        val requestCall = orderService.getOrder()
 
-        requestCall.enqueue(object: Callback<ArrayList<Orders>> {
+            val service = ServiceBuilder.RetrofitManager.getInstance()?.create(RetrofitApi::class.java)
+            val call: Call<ArrayList<Orders>>? = service?.getOrder()
+            call?.enqueue(object: Callback<ArrayList<Orders>> {
 
             override fun onResponse(call: Call<ArrayList<Orders>>, response: Response<ArrayList<Orders>>) {
                 if (response.isSuccessful) {
-                    orderList= response.body()
-                    layoutManager = LinearLayoutManager(activity!!.applicationContext)
+//                    if(orderList!!.isNotEmpty()) {
+//                        emptynotifyFrame.visibility = View.GONE
+//                        recycleFrame.visibility = View.VISIBLE
+                    orderList = response.body()
+                    layoutManager = androidx.recyclerview.widget.LinearLayoutManager(activity!!.applicationContext)
                     notification_recycle!!.layoutManager = layoutManager
-                    notification_recycle!!.itemAnimator = DefaultItemAnimator()
+                    notification_recycle!!.itemAnimator = androidx.recyclerview.widget.DefaultItemAnimator()
                     adapter = NotificationAdapter(orderList!!)
                     notification_recycle!!.adapter = adapter
 
-                    (adapter as NotificationAdapter).onItemClick = {
-
-                    }
-
                     Toast.makeText(context, "Successfully Added", Toast.LENGTH_SHORT).show()
-
+//                    }
+//                    else{
+//                        emptynotifyFrame.visibility = View.VISIBLE
+//                        recycleFrame.visibility = View.GONE
+//                    }
                 } else {
+//                    emptynotifyFrame.visibility = View.VISIBLE
+//                    recycleFrame.visibility = View.GONE
                     Toast.makeText(context, "Failed to add item", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(call: Call<ArrayList<Orders>>, t: Throwable) {
+//                emptynotifyFrame.visibility = View.VISIBLE
+//                recycleFrame.visibility = View.GONE
                 Toast.makeText(context, "Failed to connect server", Toast.LENGTH_SHORT).show()
             }
         })
+
+//        goToHome.setOnClickListener{
+//            val fragment: Fragment?
+//                fragment = HomeFragment()
+//                val frgMng: FragmentManager? = fragmentManager
+//                val frgTran = frgMng!!.beginTransaction()
+//                frgTran.replace(R.id.content_frame, fragment).addToBackStack(null).commit()
+//        }
     }
 
     // TODO: Rename method, update argument and hook method into UI event

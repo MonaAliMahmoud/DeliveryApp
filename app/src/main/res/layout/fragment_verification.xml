@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
+             tools:context=".intro.VerificationFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:srcCompat="@drawable/verifybackground"
+                android:id="@+id/loginscreen" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="0dp" android:layout_marginTop="0dp"
+                app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="0dp" android:layout_marginBottom="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <androidx.cardview.widget.CardView
+                android:layout_width="346dp"
+                android:layout_height="429dp"
+                app:cardCornerRadius="10dp"
+                android:id="@+id/cardView2"
+                app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+                app:layout_constraintTop_toTopOf="@+id/loginscreen" android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/loginscreen">
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" android:padding="20dp">
+                <TextView
+                        android:text="Verify your number"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView9" android:textSize="24sp"
+                        android:textColor="@color/colorPrimaryDark" android:textAlignment="center"
+                        android:textStyle="bold" android:layout_margin="20dp"/>
+
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:layout_marginStart="5dp">
+                    <TextView
+                            android:text="Enter the code sent to"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:textSize="18sp"
+                            android:textStyle="bold" android:textAlignment="center"/>
+                    <TextView
+                            android:text="01229959474"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:textSize="18sp"
+                            android:textStyle="bold" android:textAlignment="center"
+                            android:id="@+id/phone_num" android:layout_weight="1" android:layout_margin="10dp"/>
+                </LinearLayout>
+                <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="273dp"
+                        android:layout_height="55dp" android:layout_margin="15dp">
+                    <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:inputType="phone"
+                            android:ems="10"
+                            android:id="@+id/first_num" android:layout_weight="1" android:padding="5dp"
+                            android:layout_marginStart="6dp" android:layout_marginEnd="6dp"
+                            android:textAlignment="center" android:textSize="18sp"/>
+                    <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:inputType="phone"
+                            android:ems="10"
+                            android:id="@+id/sec_num" android:layout_weight="1" android:layout_marginStart="6dp"
+                            android:layout_marginEnd="6dp" android:textAlignment="center" android:textSize="18sp"/>
+                    <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:inputType="phone"
+                            android:ems="10"
+                            android:id="@+id/third_num" android:layout_weight="1" android:layout_marginStart="6dp"
+                            android:layout_marginEnd="6dp" android:textAlignment="center" android:textSize="18sp"/>
+                    <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:inputType="phone"
+                            android:ems="10"
+                            android:id="@+id/forth_num" android:layout_weight="1" android:layout_marginStart="6dp"
+                            android:layout_marginEnd="6dp" android:textAlignment="center"/>
+                </LinearLayout>
+                <com.google.android.material.button.MaterialButton
+                        android:layout_width="208dp"
+                        android:layout_height="wrap_content"
+                        android:text="DONE"
+                        android:id="@+id/done"
+                        android:textSize="16sp"
+                        android:textColor="#FFFFFF"
+                        app:cornerRadius="5dp"
+                        android:background="@color/colorAccent"
+                        app:strokeColor="@color/colorAccent"
+                        android:layout_marginHorizontal="20dp"
+                        android:theme="@style/FormButton"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
+                        app:strokeWidth="2dp"
+                        android:layout_marginTop="18dp"
+                        android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintVertical_bias="0.003" android:layout_marginStart="50dp"/>
+                <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                    <TextView
+                            android:text="Don't Receive Any message "
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:id="@+id/textView21" android:textSize="18sp"
+                            android:padding="5dp" android:layout_marginTop="10dp" android:textStyle="bold"/>
+                    <com.google.android.material.button.MaterialButton
+                            style="@style/Widget.AppCompat.Button.Borderless"
+                            android:layout_width="65dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/resend"
+                            android:text="RESEND"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="14sp"
+                            app:backgroundTint="@color/colorWhite"
+                            app:cornerRadius="8dp"
+                            android:textStyle="bold"
+                    />
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

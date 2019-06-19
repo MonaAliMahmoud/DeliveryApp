@@ -5,6 +5,12 @@
 
     <group android:checkableBehavior="single">
         <item
+                android:id="@+id/backhome"
+                android:icon="@drawable/menu"
+                android:title="Home"/>
+        <View android:layout_width="match_parent" android:layout_height="1dp"
+              android:background="@color/colorPrimary"/>
+        <item
                 android:id="@+id/current_order"
                 android:icon="@drawable/curentorder"
                 android:title="Current Order"/>
