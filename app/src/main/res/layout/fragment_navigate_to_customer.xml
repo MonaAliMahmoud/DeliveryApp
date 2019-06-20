@@ -117,6 +117,7 @@
                 android:layout_height="66dp"
                 android:text="CONFIRM DELIVERED"
                 android:textSize="14sp"
+                android:id="@+id/confirm_delivered"
                 android:textColor="#FFFFFF"
                 android:theme="@style/FormButton"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Button"

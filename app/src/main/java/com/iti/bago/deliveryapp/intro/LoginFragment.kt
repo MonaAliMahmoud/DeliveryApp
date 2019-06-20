@@ -1,5 +1,6 @@
 package com.iti.bago.deliveryapp.intro
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -13,6 +14,7 @@ import android.widget.Toast
 import com.iti.bago.deliveryapp.MainActivity
 import com.iti.bago.deliveryapp.R
 import com.iti.bago.deliveryapp.SharedPref
+import com.iti.bago.deliveryapp.firebase.FireBase_Obj
 //import com.iti.bago.deliveryapp.SharedPref
 import com.iti.bago.deliveryapp.network.RetrofitApi
 import com.iti.bago.deliveryapp.network.ServiceBuilder
@@ -45,6 +47,9 @@ class LoginFragment : Fragment() {
     private var listener: OnFragmentInteractionListener? = null
 
     private  var shared : SharedPref? = SharedPref()
+    val countrycode = "020"
+    var phonenumber : String = ""
+    var deliverylogin: Login = Login(countrycode, phonenumber)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,6 +67,7 @@ class LoginFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_login, container, false)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -73,36 +79,70 @@ class LoginFragment : Fragment() {
 //            frgTran.replace(R.id.intro_frame, fragment).addToBackStack(null).commit()
 //        }
 
-        val deliverylogin: Login = Login("020", "01000000000")
-
-//        deliverylogin!!.country_code = countryCode.text.toString()
-//        deliverylogin.phone_number = phone_number.text.toString()
-
         confirm_signin.setOnClickListener {
 
-            val service = ServiceBuilder.RetrofitManager.getInstance()?.create(RetrofitApi::class.java)
-            val call: Call<DeliveryApi>? = service?.postToken(deliverylogin)
-            call?.enqueue(object : Callback<DeliveryApi> {
+            validate_txt.text = ""
+            phonenumber = phone_number.text.toString()
+            if (phonenumber != "") {
+                phonenumber = phone_number.text.toString()
+                deliverylogin.country_code = countrycode
+                deliverylogin.phone_number = phonenumber
 
-                override fun onResponse(call: Call<DeliveryApi>, response: Response<DeliveryApi>) {
-                    if (response.isSuccessful) {
-                        var obj = response.body()!!
-                        var context1= context!!
-                        shared?.saveDeliveryObj(obj, context1)
-                        val tokenResponse: String = response.body()!!.token
-//                        Toast.makeText(context, tokenResponse, Toast.LENGTH_SHORT).show()
-                        val intent = Intent()
-                        intent.setClass(activity!!, MainActivity::class.java)
-                        activity!!.startActivity(intent)
-                    } else {
-                        Toast.makeText(context, "Failed to add item", Toast.LENGTH_SHORT).show()
+                Log.i("phone", phone_number.toString())
+                val service = ServiceBuilder.RetrofitManager.getInstance()?.create(RetrofitApi::class.java)
+                val call: Call<DeliveryApi>? = service?.postToken(deliverylogin)
+                call?.enqueue(object : Callback<DeliveryApi> {
+
+                    override fun onResponse(call: Call<DeliveryApi>, response: Response<DeliveryApi>) {
+                        if (response.isSuccessful) {
+                            val obj = response.body()!!
+                            val context1 = context!!
+                            shared?.saveDeliveryObj(obj, context1)
+                            val tokenResponse: String = response.body()!!.token
+                            //                        Toast.makeText(context, tokenResponse, Toast.LENGTH_SHORT).show()
+
+                            var firetoken = shared?.getFirebaseToken(context!!)
+                            val delObj = shared!!.getDeliveryObj(context!!)
+                            var deliveryId = delObj!!.delivery.id
+
+//                            val service2 = ServiceBuilder.RetrofitManager.getInstance()?.create(RetrofitApi::class.java)
+//                            val call2: Call<FireBase_Obj>? = service2?.postFirebaseToken(deliveryId, firetoken!!)
+//                            call2?.enqueue(object : Callback<FireBase_Obj> {
+//
+//                                override fun onResponse(call: Call<FireBase_Obj>, response: Response<FireBase_Obj>) {
+//                                    if (response.isSuccessful) {
+//                                        val obj2 = response.body()!!
+//                                        Log.i("token", obj2.driver_token)
+//
+//                                    } else {
+//                                        Toast.makeText(context, "Failed send token", Toast.LENGTH_SHORT).show()
+//                                    }
+//                                }
+//                                override fun onFailure(call: Call<FireBase_Obj>, t: Throwable) {
+//                                    Toast.makeText(context, "Failed to connect server ", Toast.LENGTH_SHORT).show()
+//                                }
+//                            })
+
+                            val intent = Intent()
+                            intent.setClass(activity!!, MainActivity::class.java)
+                            activity!!.startActivity(intent)
+                            activity!!.finish()
+                        } else {
+                            validate_txt.text = "Please Enter Valid Number"
+//                            phone_number
+//                            Toast.makeText(context, "Failed to login", Toast.LENGTH_SHORT).show()
+                        }
                     }
-                }
 
-                override fun onFailure(call: Call<DeliveryApi>, t: Throwable) {
-                    Toast.makeText(context, "Failed to connect", Toast.LENGTH_SHORT).show()
-                }
-            })
+                    override fun onFailure(call: Call<DeliveryApi>, t: Throwable) {
+                        Toast.makeText(context, "Failed to connect server ", Toast.LENGTH_SHORT).show()
+                    }
+                })
+            }
+            else{
+                validate_txt.text = "Please Enter Your Number!"
+//                phone_number.text
+            }
         }
     }
 

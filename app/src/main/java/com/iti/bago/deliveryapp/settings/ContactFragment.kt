@@ -48,7 +48,7 @@ class ContactFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        activity!!.title = "Contact Us"
+        activity!!.title = "CONTACT US"
     }
 
     // TODO: Rename method, update argument and hook method into UI event

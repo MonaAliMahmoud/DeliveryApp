@@ -63,7 +63,7 @@ class CurrentOrderFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        activity!!.title = "Current Order"
+        activity!!.title = "CURRENT ORDER"
 
         val arguments = arguments
 
@@ -109,6 +109,7 @@ class CurrentOrderFragment : Fragment() {
             arguments.putString("customer_phone_number", customerPhone)
             arguments.putString("customer_name", customerName)
             arguments.putString("customer_address", customerAddress)
+
             fragment = BusyFragment()
             fragment.setArguments(arguments)
             val frgMng = fragmentManager

@@ -53,7 +53,7 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        activity!!.title = "Profile"
+        activity!!.title = "PROFILE"
 
         val delObj = pref!!.getDeliveryObj(context!!)
         var delivname = delObj!!.delivery.name

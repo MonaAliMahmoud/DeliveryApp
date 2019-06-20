@@ -13,23 +13,31 @@ import android.app.PendingIntent
 import android.content.Intent
 import android.graphics.Color
 import android.os.Build
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import com.iti.bago.deliveryapp.SharedPref
 import com.iti.bago.deliveryapp.menu.TutorialsFragment
+import com.iti.bago.deliveryapp.network.RetrofitApi
+import com.iti.bago.deliveryapp.network.ServiceBuilder
+import com.iti.bago.deliveryapp.pojo.Login
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class FirebaseService : FirebaseMessagingService() {
 
-    var pref: SharedPref?=null
-    var json :String? = null
+    var pref: SharedPref?= SharedPref()
+    var json :String? = ""
 
     private val TAG = "MyFirebaseToken"
     private lateinit var notificationManager: NotificationManager
     private val ADMIN_CHANNEL_ID = "Mona"
 
-
     override fun onNewToken(token: String?) {
         super.onNewToken(token)
         pref = SharedPref()
+       // var delObj = pref?.getDeliveryObj(applicationContext)
+
         pref!!.setFirebaseToken(token, this)
         Log.i(TAG, token)
     }

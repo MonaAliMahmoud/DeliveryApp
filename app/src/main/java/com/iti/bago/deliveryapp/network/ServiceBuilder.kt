@@ -4,7 +4,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object ServiceBuilder {
-    // Before release, change this URL to your live server URL such as "https://smartherd.com/"
+
     private const val URL = "http://bago.ibtikar.net.sa/api/"
 
 //    val headerInterceptor = object: Interceptor {

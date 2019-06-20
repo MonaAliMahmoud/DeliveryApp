@@ -9,14 +9,14 @@ import android.os.AsyncTask
 import android.os.Build
 import android.os.Bundle
 import android.os.Looper
-import androidx.core.app.ActivityCompat
-import androidx.fragment.app.Fragment
-import androidx.core.content.ContextCompat
-import androidx.appcompat.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -26,8 +26,6 @@ import com.google.android.gms.maps.model.*
 import com.iti.bago.deliveryapp.HomeFragment
 import com.iti.bago.deliveryapp.R
 import kotlinx.android.synthetic.main.fragment_busy.*
-import kotlinx.android.synthetic.main.fragment_current_order.market_address
-import kotlinx.android.synthetic.main.fragment_current_order.market_name
 import kotlinx.android.synthetic.main.state_buttons.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -152,24 +150,13 @@ class BusyFragment : Fragment(), OnMapReadyCallback, TaskLoadedCallback {
             it.setBackgroundColor(resources.getColor(R.color.colorAccent))
             busy.setBackgroundColor(resources.getColor(R.color.colorPrimary))
             available.setBackgroundColor(resources.getColor(R.color.colorPrimary))
-            val builder = AlertDialog.Builder(activity!!)
-            builder.setMessage("You are Offline Return Available to receive Orders")
-            //builder.setPositiveButton("OK", DialogInterface.OnClickListener(function = x))
-            builder.setPositiveButton(android.R.string.yes) { _, _ ->
-                Toast.makeText(activity!!,
-                    android.R.string.yes, Toast.LENGTH_SHORT).show()
-            }
-            builder.setNegativeButton(android.R.string.no) { _, _ ->
-                Toast.makeText(activity!!,
-                    android.R.string.no, Toast.LENGTH_SHORT).show()
-            }
-            builder.show()
+            it.isClickable = false
         }
         available.setOnClickListener{
             it.setBackgroundColor(resources.getColor(R.color.colorAccent))
             busy.setBackgroundColor(resources.getColor(R.color.colorPrimary))
             offline.setBackgroundColor(resources.getColor(R.color.colorPrimary))
-
+            it.isClickable = false
             fragment = HomeFragment()
             if (fragment != null){
                 val frgMng = fragmentManager
@@ -180,9 +167,7 @@ class BusyFragment : Fragment(), OnMapReadyCallback, TaskLoadedCallback {
         busy.setOnClickListener{
             it.setBackgroundColor(resources.getColor(R.color.colorAccent))
             offline.setBackgroundColor(resources.getColor(R.color.colorPrimary))
-            offline.isClickable = false
             available.setBackgroundColor(resources.getColor(R.color.colorPrimary))
-            available.isClickable = false
         }
 
         confirm_arrive.setOnClickListener {

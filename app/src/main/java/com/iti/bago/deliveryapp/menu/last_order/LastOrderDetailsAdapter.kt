@@ -13,10 +13,9 @@ import com.iti.bago.deliveryapp.menu.current_order.ItemOrderAdapter
 import com.iti.bago.deliveryapp.pojo.ItemOrder
 import com.iti.bago.deliveryapp.pojo.Products
 
-class LastOrderDetailsAdapter (product: ArrayList<Products>, context: Context): RecyclerView.Adapter<LastOrderDetailsAdapter.ViewHolder>() {
+class LastOrderDetailsAdapter (product: ArrayList<Products>): RecyclerView.Adapter<LastOrderDetailsAdapter.ViewHolder>() {
 
     private var product: ArrayList<Products>? = product
-    var mcontext: Context = context
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 

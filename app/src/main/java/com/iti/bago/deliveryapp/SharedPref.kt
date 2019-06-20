@@ -6,7 +6,6 @@ import android.util.Log
 import com.iti.bago.deliveryapp.pojo.DeliveryApi
 import com.google.gson.Gson
 
-
 class SharedPref {
 
     fun saveDeliveryObj(deliveryApi: DeliveryApi, context: Context)
@@ -38,11 +37,16 @@ class SharedPref {
         prefsEditor.apply()
     }
 
+    fun getFirebaseToken(context: Context): String?{
+        val prefs = PreferenceManager.getDefaultSharedPreferences(context)
+        val token = prefs.getString("firebaseToken", "")
+        return token
+    }
+
     fun clear(context: Context) {
         val prefs = PreferenceManager.getDefaultSharedPreferences(context)
         val prefsEditor = prefs.edit()
         prefsEditor.clear()
         prefsEditor.apply()
     }
-
 }

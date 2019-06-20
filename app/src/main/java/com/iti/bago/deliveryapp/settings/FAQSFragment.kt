@@ -31,7 +31,6 @@ class FAQSFragment : Fragment() {
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
 
-
     internal var expandableListView1: ExpandableListView? = null
     internal var expandableListView2: ExpandableListView? = null
     internal var adapter: ExpandableListAdapter? = null
@@ -42,29 +41,20 @@ class FAQSFragment : Fragment() {
             val listData = HashMap<String, List<String>>()
 
             val Lorem_ipsum1 = ArrayList<String>()
-            Lorem_ipsum1.add("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been\n" +
-                    "        the industry\\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and\n" +
-                    "        scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into\n" +
-                    "        electronic typesetting, remaining essentially unchanged.")
+            Lorem_ipsum1.add("First, you need to add a product to your cart, add a product to your cart by selecting the cart icon, find your cart at the menu and complete your purchase.\n" +
+                    "How to change.")
 
             val Lorem_ipsum2 = ArrayList<String>()
-            Lorem_ipsum2.add("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been\n" +
-                    "        the industry\\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and\n" +
-                    "        scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into\n" +
-                    "        electronic typesetting, remaining essentially unchanged.")
+            Lorem_ipsum2.add("First, you need to add a product to your cart, add a product to your cart by selecting the cart icon, find your cart at the menu and complete your purchase.\n" +
+                    "How to change.")
 
             val Lorem_ipsum3 = ArrayList<String>()
-            Lorem_ipsum3.add("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been\n" +
-                    "        the industry\\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and\n" +
-                    "        scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into\n" +
-                    "        electronic typesetting, remaining essentially unchanged.")
+            Lorem_ipsum3.add("First, you need to add a product to your cart, add a product to your cart by selecting the cart icon, find your cart at the menu and complete your purchase.\\n\" +\n" +
+                    "                    \"How to change.")
 
-            listData["Lorem ipsum1?"] = Lorem_ipsum1
-            listData["Lorem ipsum2?"] = Lorem_ipsum2
-            listData["Lorem ipsum3?"] = Lorem_ipsum3
-            listData["Lorem ipsum4?"] = Lorem_ipsum1
-            listData["Lorem ipsum5?"] = Lorem_ipsum2
-            listData["Lorem ipsum6?"] = Lorem_ipsum3
+            listData["How to make orders?"] = Lorem_ipsum1
+            listData["How to change supermarkets?"] = Lorem_ipsum2
+            listData["How to set my address?"] = Lorem_ipsum3
 
             return listData
         }

@@ -144,24 +144,13 @@ class NavigateToCustomerFragment : Fragment() ,OnMapReadyCallback, TaskLoadedCal
             it.setBackgroundColor(resources.getColor(R.color.colorAccent))
             busy.setBackgroundColor(resources.getColor(R.color.colorPrimary))
             available.setBackgroundColor(resources.getColor(R.color.colorPrimary))
-            val builder = AlertDialog.Builder(activity!!)
-            builder.setMessage("You are Offline Return Available to receive Orders")
-            //builder.setPositiveButton("OK", DialogInterface.OnClickListener(function = x))
-            builder.setPositiveButton(android.R.string.yes) { _, _ ->
-                Toast.makeText(activity!!,
-                    android.R.string.yes, Toast.LENGTH_SHORT).show()
-            }
-            builder.setNegativeButton(android.R.string.no) { _, _ ->
-                Toast.makeText(activity!!,
-                    android.R.string.no, Toast.LENGTH_SHORT).show()
-            }
-            builder.show()
+           it.isClickable = false
         }
         available.setOnClickListener{
             it.setBackgroundColor(resources.getColor(R.color.colorAccent))
             busy.setBackgroundColor(resources.getColor(R.color.colorPrimary))
             offline.setBackgroundColor(resources.getColor(R.color.colorPrimary))
-
+            it.isClickable = false
             fragment = HomeFragment()
             if (fragment != null){
                 val frgMng = fragmentManager
@@ -172,9 +161,18 @@ class NavigateToCustomerFragment : Fragment() ,OnMapReadyCallback, TaskLoadedCal
         busy.setOnClickListener{
             it.setBackgroundColor(resources.getColor(R.color.colorAccent))
             offline.setBackgroundColor(resources.getColor(R.color.colorPrimary))
-            offline.isClickable = false
             available.setBackgroundColor(resources.getColor(R.color.colorPrimary))
-            available.isClickable = false
+            it.isClickable = false
+        }
+
+        confirm_delivered.setOnClickListener{
+            val mDialogView = LayoutInflater.from(context).inflate(R.layout.confirm_dialog, null)
+            //AlertDialogBuilder
+            val mBuilder = AlertDialog.Builder(context!!)
+                .setView(mDialogView)
+            //show dialog
+            val  mAlertDialog = mBuilder.show()
+
         }
     }
 

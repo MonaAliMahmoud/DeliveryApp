@@ -1,4 +1,4 @@
-package com.iti.bago.deliveryapp.menu
+package com.iti.bago.deliveryapp.intro
 
 import android.content.Context
 import android.net.Uri
@@ -9,9 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.iti.bago.deliveryapp.R
-import com.iti.bago.deliveryapp.menu.current_order.CurrentOrderFragment
-import com.iti.bago.deliveryapp.settings.*
-import kotlinx.android.synthetic.main.fragment_settings.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -21,14 +18,13 @@ private const val ARG_PARAM2 = "param2"
 /**
  * A simple [Fragment] subclass.
  * Activities that contain this fragment must implement the
- * [SettingsFragment.OnFragmentInteractionListener] interface
+ * [WalkThrough1Fragment.OnFragmentInteractionListener] interface
  * to handle interaction events.
- * Use the [SettingsFragment.newInstance] factory method to
+ * Use the [WalkThrough1Fragment.newInstance] factory method to
  * create an instance of this fragment.
  *
  */
-class SettingsFragment : Fragment(), View.OnClickListener {
-
+class WalkThrough1Fragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -47,51 +43,7 @@ class SettingsFragment : Fragment(), View.OnClickListener {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_settings, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        activity!!.title = "SETTINGS"
-
-        profile.setOnClickListener(this)
-//        language.setOnClickListener(this)
-        faqs.setOnClickListener(this)
-        about.setOnClickListener(this)
-        policy.setOnClickListener(this)
-        contact.setOnClickListener(this)
-        logout.setOnClickListener(this)
-    }
-    override fun onClick(v: View?) {
-
-        var fragment : Fragment? = null
-
-        when (v!!.id) {
-            R.id.profile -> {
-                fragment = ProfileFragment()
-            }
-            R.id.faqs -> {
-                fragment = FAQSFragment()
-            }
-            R.id.about -> {
-                fragment = AboutFragment()
-            }
-            R.id.policy -> {
-                fragment = PolicyFragment()
-            }
-            R.id.contact -> {
-                fragment = ContactFragment()
-            }
-            R.id.logout -> {
-                fragment = AboutFragment()
-            }
-        }
-
-        if (fragment != null){
-            val frgMng = fragmentManager
-            val frgTran = frgMng!!.beginTransaction()
-            frgTran.replace(R.id.content_frame, fragment).addToBackStack(null).commit()
-        }
+        return inflater.inflate(R.layout.fragment_walk_through1, container, false)
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -104,7 +56,7 @@ class SettingsFragment : Fragment(), View.OnClickListener {
         if (context is OnFragmentInteractionListener) {
             listener = context
         } else {
-//            throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener")
+            throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener")
         }
     }
 
@@ -113,16 +65,35 @@ class SettingsFragment : Fragment(), View.OnClickListener {
         listener = null
     }
 
+    /**
+     * This interface must be implemented by activities that contain this
+     * fragment to allow an interaction in this fragment to be communicated
+     * to the activity and potentially other fragments contained in that
+     * activity.
+     *
+     *
+     * See the Android Training lesson [Communicating with Other Fragments]
+     * (http://developer.android.com/training/basics/fragments/communicating.html)
+     * for more information.
+     */
     interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         fun onFragmentInteraction(uri: Uri)
     }
 
     companion object {
+        /**
+         * Use this factory method to create a new instance of
+         * this fragment using the provided parameters.
+         *
+         * @param param1 Parameter 1.
+         * @param param2 Parameter 2.
+         * @return A new instance of fragment WalkThrough1Fragment.
+         */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            SettingsFragment().apply {
+            WalkThrough1Fragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

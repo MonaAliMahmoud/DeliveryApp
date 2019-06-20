@@ -97,16 +97,6 @@ class HomeFragment : Fragment(), OnMapReadyCallback, LocationListener, GoogleApi
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
-        view!!.isFocusableInTouchMode = true;
-        val requestFocus = view!!.requestFocus();
-        view!!.setOnKeyListener(object : View.OnKeyListener {
-            override fun onKey(v: View, keyCode: Int, event: KeyEvent): Boolean {
-                 if (keyCode == KeyEvent.KEYCODE_BACK) {
-
-                     return true
-                } else return false
-            }
-        })
     }
 
     override fun onCreateView(
@@ -114,7 +104,6 @@ class HomeFragment : Fragment(), OnMapReadyCallback, LocationListener, GoogleApi
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-
         mapView = inflater.inflate(R.layout.fragment_home, container, false)
         mapFragment = childFragmentManager.findFragmentById(R.id.homeMap) as SupportMapFragment
         if (mapFragment == null){
@@ -136,14 +125,13 @@ class HomeFragment : Fragment(), OnMapReadyCallback, LocationListener, GoogleApi
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        activity!!.title = "Home"
+        activity!!.title = "HOME"
 
 //        delObj!!.delivery.name = shared.getDeliveryObj()
         var fragment: Fragment?
 
         val delObj = pref!!.getDeliveryObj(context!!)
         var nameDel = delObj!!.delivery.name
-        Toast.makeText(context, nameDel, Toast.LENGTH_SHORT).show()
 
         available.setBackgroundColor(resources.getColor(R.color.colorAccent))
         busy.setBackgroundColor(resources.getColor(R.color.colorPrimary))
@@ -153,18 +141,26 @@ class HomeFragment : Fragment(), OnMapReadyCallback, LocationListener, GoogleApi
             it.setBackgroundColor(resources.getColor(R.color.colorAccent))
             busy.setBackgroundColor(resources.getColor(R.color.colorPrimary))
             available.setBackgroundColor(resources.getColor(R.color.colorPrimary))
-            val builder = AlertDialog.Builder(activity!!)
-            builder.setMessage("You are Offline Return Available to receive Orders")
-            //builder.setPositiveButton("OK", DialogInterface.OnClickListener(function = x))
-            builder.setPositiveButton(android.R.string.yes) { _, _ ->
-                Toast.makeText(activity!!,
-                    android.R.string.yes, Toast.LENGTH_SHORT).show()
-            }
-            builder.setNegativeButton(android.R.string.no) { _, _ ->
-                Toast.makeText(activity!!,
-                    android.R.string.no, Toast.LENGTH_SHORT).show()
-            }
-            builder.show()
+//            val builder = AlertDialog.Builder(activity!!)
+//            builder.setMessage("You are Offline Return Available to receive Orders")
+//            //builder.setPositiveButton("OK", DialogInterface.OnClickListener(function = x))
+//            builder.setPositiveButton(android.R.string.yes) { _, _ ->
+//                Toast.makeText(activity!!,
+//                    android.R.string.yes, Toast.LENGTH_SHORT).show()
+//            }
+//            builder.setNegativeButton(android.R.string.no) { _, _ ->
+//                Toast.makeText(activity!!,
+//                    android.R.string.no, Toast.LENGTH_SHORT).show()
+//            }
+//            builder.show()
+
+            val mDialogView = LayoutInflater.from(context).inflate(R.layout.offline_dialog, null)
+            //AlertDialogBuilder
+            val mBuilder = AlertDialog.Builder(context!!)
+                .setView(mDialogView)
+            //show dialog
+            val  mAlertDialog = mBuilder.show()
+
         }
         available.setOnClickListener{
             it.setBackgroundColor(resources.getColor(R.color.colorAccent))
@@ -172,17 +168,17 @@ class HomeFragment : Fragment(), OnMapReadyCallback, LocationListener, GoogleApi
             offline.setBackgroundColor(resources.getColor(R.color.colorPrimary))
         }
         busy.setOnClickListener{
-            it.setBackgroundColor(resources.getColor(R.color.colorAccent))
-            offline.setBackgroundColor(resources.getColor(R.color.colorPrimary))
-            offline.isClickable = false
-            available.setBackgroundColor(resources.getColor(R.color.colorPrimary))
-            available.isClickable = false
             fragment = BusyFragment()
             if (fragment != null){
                 val frgMng = fragmentManager
                 val frgTran = frgMng!!.beginTransaction()
                 frgTran.replace(R.id.content_frame, fragment as BusyFragment).addToBackStack(null).commit()
             }
+            it.setBackgroundColor(resources.getColor(R.color.colorAccent))
+            offline.setBackgroundColor(resources.getColor(R.color.colorPrimary))
+            offline.isClickable = false
+            available.setBackgroundColor(resources.getColor(R.color.colorPrimary))
+            available.isClickable = false
         }
 
         addressLayout.visibility = View.GONE

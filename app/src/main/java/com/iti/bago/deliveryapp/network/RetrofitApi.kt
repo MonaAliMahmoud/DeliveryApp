@@ -1,18 +1,15 @@
 package com.iti.bago.deliveryapp.network
 
+import com.iti.bago.deliveryapp.firebase.FireBase_Obj
 import com.iti.bago.deliveryapp.pojo.DeliveryApi
 import com.iti.bago.deliveryapp.pojo.LastOrders
 import com.iti.bago.deliveryapp.pojo.Orders
 import com.iti.bago.deliveryapp.pojo.Login
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface RetrofitApi {
 
-//    OrderDeliveryHistory/{deliver_id}
     @GET("OrderDelivery")
     fun getOrder(): Call<ArrayList<Orders>>
 
@@ -21,4 +18,10 @@ interface RetrofitApi {
 
     @GET("OrderDeliveryHistory/{id}")
     fun getHistory(@Path ("id") id: Int): Call<ArrayList<LastOrders>>
+
+    @PUT("Deliverystatus/{id}")
+    fun changeStatus(@Body @Path ("id") id: Int): Call<DeliveryApi>
+
+    @POST("DeliveryTokenDevice")
+    fun postFirebaseToken(@Body delivery_id: Int,@Body token: String): Call<FireBase_Obj>
 }

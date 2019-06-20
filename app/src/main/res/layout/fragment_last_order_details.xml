@@ -10,18 +10,35 @@
         <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:background="@color/colorWhite">
+                android:layout_height="wrap_content">
 
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:orientation="vertical"
+                          android:background="@color/colorWhite"
+                          android:layout_marginStart="32dp" android:layout_marginEnd="32dp"
+                          android:layout_marginTop="15dp">
+                <TextView
+                        android:text="Trip Map"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp" android:textStyle="bold"
+                        android:textAlignment="center"/>
+                <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" app:srcCompat="@drawable/map"
+                        android:id="@+id/imageView12" android:padding="10dp"/>
+
+            </LinearLayout>
             <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="612dp"
                     android:id="@+id/cardView"
-                    android:layout_margin="15dp"
                     android:background="@color/colorWhite"
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginStart="32dp"
                     app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="32dp"
-                    android:layout_marginTop="16dp" app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="15dp" app:layout_constraintTop_toTopOf="parent"
                     android:layout_marginBottom="8dp" app:layout_constraintBottom_toTopOf="@+id/confirm_btn">
 
                 <LinearLayout
@@ -57,35 +74,37 @@
                                 android:text="TextView"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/marketname"
+                                android:id="@+id/storename"
                                 android:layout_weight="1"/>
                         <TextView
                                 android:text="TextView"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/marketaddress"
+                                android:id="@+id/storeaddress"
                                 android:layout_weight="1"/>
                         <TextView
                                 android:text="Customer Address"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content" android:id="@+id/textView24"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/textView24"
                                 android:textStyle="bold" android:layout_weight="1"/>
                         <TextView
                                 android:text="TextView"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/customeraddress"
+                                android:id="@+id/useraddress"
                                 android:layout_weight="1"/>
                         <TextView
                                 android:text="Payment"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content" android:id="@+id/textView22"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/textView22"
                                 android:textStyle="bold" android:layout_weight="1"/>
                         <TextView
                                 android:text="TextView"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/payment_type"
+                                android:id="@+id/paymentType"
                                 android:layout_weight="1"/>
 
                         <TextView
@@ -97,7 +116,7 @@
                                 android:text="TextView"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/timedate"
+                                android:id="@+id/tdate"
                                 android:layout_weight="1"/>
                         <TextView
                                 android:text="Items Order"
@@ -112,7 +131,7 @@
                             android:layout_height="274dp" android:layout_weight="1" android:weightSum="3">
 
                         <androidx.recyclerview.widget.RecyclerView
-                                android:id="@+id/item_card"
+                                android:id="@+id/product_recycle"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
@@ -121,6 +140,4 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
-
-
 </FrameLayout>

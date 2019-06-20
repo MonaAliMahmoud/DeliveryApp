@@ -71,7 +71,6 @@ class VerificationFragment : Fragment() {
 //            intent.setClass(activity!!, MainActivity::class.java)
 //            activity!!.startActivity(intent)
             sendSMs()
-
         }
     }
 

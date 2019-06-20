@@ -48,7 +48,7 @@ class PolicyFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        activity!!.title = "Privacy Policy"
+        activity!!.title = "PRIVACY POLICY"
     }
 
     // TODO: Rename method, update argument and hook method into UI event

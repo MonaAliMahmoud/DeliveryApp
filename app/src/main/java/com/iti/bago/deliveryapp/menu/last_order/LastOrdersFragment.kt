@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.iti.bago.deliveryapp.R
+import com.iti.bago.deliveryapp.SharedPref
 import com.iti.bago.deliveryapp.network.RetrofitApi
 import com.iti.bago.deliveryapp.network.ServiceBuilder
 import com.iti.bago.deliveryapp.pojo.LastOrders
@@ -41,7 +42,7 @@ class LastOrdersFragment : Fragment() {
     private var adapter: androidx.recyclerview.widget.RecyclerView.Adapter<LastOrderAdapter.ViewHolder>? = null
 
     var lorderList: ArrayList<LastOrders>? = null
-
+    var pref: SharedPref? = SharedPref()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,9 +64,11 @@ class LastOrdersFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         activity!!.title = "Last Orders"
 
-        var id = 1
+        val delObj = pref!!.getDeliveryObj(context!!)
+        var delivid = delObj!!.delivery.id
+
         val service = ServiceBuilder.RetrofitManager.getInstance()?.create(RetrofitApi::class.java)
-        val call: Call<ArrayList<LastOrders>>? = service?.getHistory(id)
+        val call: Call<ArrayList<LastOrders>>? = service?.getHistory(delivid)
         call?.enqueue(object : Callback<ArrayList<LastOrders>> {
 
             override fun onResponse(call: Call<ArrayList<LastOrders>>, response: Response<ArrayList<LastOrders>>) {
