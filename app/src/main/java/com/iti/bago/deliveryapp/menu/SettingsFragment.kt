@@ -1,6 +1,7 @@
 package com.iti.bago.deliveryapp.menu
 
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,6 +10,8 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.iti.bago.deliveryapp.R
+import com.iti.bago.deliveryapp.SharedPref
+import com.iti.bago.deliveryapp.intro.SplashActivity
 import com.iti.bago.deliveryapp.menu.current_order.CurrentOrderFragment
 import com.iti.bago.deliveryapp.settings.*
 import kotlinx.android.synthetic.main.fragment_settings.*
@@ -33,6 +36,8 @@ class SettingsFragment : Fragment(), View.OnClickListener {
     private var param1: String? = null
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
+
+    var pref : SharedPref? = SharedPref()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -83,7 +88,9 @@ class SettingsFragment : Fragment(), View.OnClickListener {
                 fragment = ContactFragment()
             }
             R.id.logout -> {
-                fragment = AboutFragment()
+//                pref!!.clear(context!!)
+                pref!!.setIsLoggedIn(false,context!!)
+                startActivity(Intent(context, SplashActivity::class.java))
             }
         }
 

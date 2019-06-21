@@ -17,7 +17,7 @@
                 android:layout_height="154dp"
                 app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="24dp"
                 app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="24dp"
-                android:id="@+id/linearLayout"
+                android:id="@+id/busycard"
                 android:layout_marginBottom="8dp" app:layout_constraintBottom_toTopOf="@+id/busyMap"
                 android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="@+id/include">
 
@@ -37,15 +37,18 @@
                         <TextView
                                 android:text="Market"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content" android:id="@+id/textView2" android:textSize="18sp"
-                                android:textStyle="bold" android:textAlignment="textStart" android:paddingStart="20dp"
-                                android:paddingTop="3dp" android:paddingEnd="20dp" android:paddingBottom="3dp"/>
+                                android:layout_height="wrap_content" android:id="@+id/textView2"
+                                android:textSize="14sp"
+                                android:textStyle="bold" android:textAlignment="textStart"
+                                android:paddingStart="20dp"
+                                android:paddingTop="3dp" android:paddingEnd="20dp"
+                                android:paddingBottom="3dp"/>
                         <TextView
                                 android:text="Fresh Food"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content" android:id="@+id/marketname"
                                 android:layout_weight="1"
-                                android:textSize="18sp" android:paddingStart="20dp"
+                                android:textSize="14sp" android:paddingStart="20dp"
                                 android:paddingTop="3dp" android:paddingEnd="20dp" android:paddingBottom="3dp"
                                 android:textAlignment="textEnd"/>
                     </LinearLayout>
@@ -57,7 +60,8 @@
                         <TextView
                                 android:text="Customer Number"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content" android:id="@+id/textView3" android:textSize="18sp"
+                                android:layout_height="wrap_content" android:id="@+id/textView3"
+                                android:textSize="14sp"
                                 android:textStyle="bold" android:textAlignment="textStart" android:paddingStart="20dp"
                                 android:paddingTop="3dp" android:paddingEnd="20dp" android:paddingBottom="3dp"
                         />
@@ -84,17 +88,19 @@
                         <TextView
                                 android:text="Store Location"
                                 android:layout_width="match_parent"
-                                android:layout_height="17dp" android:id="@+id/textView5" android:layout_weight="1"
-                                android:textSize="18sp"
-                                android:textStyle="bold" android:textAlignment="textStart" android:paddingStart="20dp"
-                                android:paddingTop="3dp" android:paddingBottom="3dp" android:paddingEnd="20dp"/>
+                                android:layout_height="2dp" android:id="@+id/textView5"
+                                android:layout_weight="1"
+                                android:textSize="14sp"
+                                android:textStyle="bold" android:textAlignment="textStart"
+                                android:paddingStart="20dp"
+                                android:paddingTop="3dp" android:paddingEnd="20dp"/>
                         <TextView
                                 android:text="San Stefano Mall"
                                 android:layout_width="match_parent"
                                 android:layout_height="17dp" android:id="@+id/marketaddress" android:layout_weight="1"
-                                android:textSize="14sp"
+                                android:textSize="12sp"
                                 android:textStyle="bold" android:textAlignment="textStart" android:paddingStart="20dp"
-                                android:paddingTop="3dp" android:paddingBottom="3dp" android:paddingEnd="20dp"/>
+                                android:paddingBottom="3dp" android:paddingEnd="20dp"/>
                     </LinearLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>

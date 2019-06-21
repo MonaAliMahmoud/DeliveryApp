@@ -14,9 +14,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -25,6 +27,8 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
 import com.iti.bago.deliveryapp.HomeFragment
 import com.iti.bago.deliveryapp.R
+import com.iti.bago.deliveryapp.menu.current_order.CurrentOrderFragment
+import com.iti.bago.deliveryapp.pojo.Orders
 import kotlinx.android.synthetic.main.fragment_busy.*
 import kotlinx.android.synthetic.main.state_buttons.*
 
@@ -63,6 +67,8 @@ class BusyFragment : Fragment(), OnMapReadyCallback, TaskLoadedCallback {
     private var mMarker: Marker? = null
 
     private var DEFAULT_ZOOM = 14f
+
+    private var orders = ArrayList<Orders>()
 
     var storeName: String? = ""
     var storeAddress: String? = ""
@@ -119,6 +125,13 @@ class BusyFragment : Fragment(), OnMapReadyCallback, TaskLoadedCallback {
         super.onViewCreated(view, savedInstanceState)
         activity!!.title = "Navigate To Store"
 
+        offline.setBackgroundColor(resources.getColor(R.color.colorPrimary))
+        offline.isClickable=false
+        offline.isEnabled=false
+        available.setBackgroundColor(resources.getColor(R.color.colorPrimary))
+        available.isClickable=false
+        available.isEnabled=false
+
         var fragment: Fragment?
 
         val arguments = arguments
@@ -167,20 +180,31 @@ class BusyFragment : Fragment(), OnMapReadyCallback, TaskLoadedCallback {
         busy.setOnClickListener{
             it.setBackgroundColor(resources.getColor(R.color.colorAccent))
             offline.setBackgroundColor(resources.getColor(R.color.colorPrimary))
+            offline.isClickable=false
+            offline.isEnabled=false
             available.setBackgroundColor(resources.getColor(R.color.colorPrimary))
+            available.isClickable=false
+            available.isEnabled=false
         }
 
+//        busycard.setOnClickListener{
+//            val activity = it.context as AppCompatActivity
+//            fragment = CurrentOrderFragment()
+//            val frgMng: FragmentManager = activity.supportFragmentManager
+//            val frgTran = frgMng.beginTransaction()
+//            frgTran.replace(R.id.content_frame, fragment!!).addToBackStack(null).commit()
+//        }
+
         confirm_arrive.setOnClickListener {
-            val fragment: Fragment?
             val arguments = Bundle()
             arguments.putString("customer_name", customerName)
             arguments.putString("customer_address", customerAddress)
             arguments.putString("customer_phone_number", customerPhone)
             fragment = NavigateToCustomerFragment()
-            fragment.setArguments(arguments)
+            fragment!!.setArguments(arguments)
             val frgMng = fragmentManager
             val frgTran = frgMng!!.beginTransaction()
-            frgTran.replace(R.id.content_frame, fragment).addToBackStack(null).commit()
+            frgTran.replace(R.id.content_frame, fragment!!).addToBackStack(null).commit()
         }
     }
 
@@ -250,7 +274,6 @@ class BusyFragment : Fragment(), OnMapReadyCallback, TaskLoadedCallback {
                 if (currentPolyline != null)
                     currentPolyline!!.remove()
                 currentPolyline = mMap!!.addPolyline(values[0] as PolylineOptions)
-
 
             }
 

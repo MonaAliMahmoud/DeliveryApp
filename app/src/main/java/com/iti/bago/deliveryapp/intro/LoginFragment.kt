@@ -15,6 +15,7 @@ import com.iti.bago.deliveryapp.MainActivity
 import com.iti.bago.deliveryapp.R
 import com.iti.bago.deliveryapp.SharedPref
 import com.iti.bago.deliveryapp.firebase.FireBase_Obj
+import com.iti.bago.deliveryapp.firebase.Firebase_Response
 //import com.iti.bago.deliveryapp.SharedPref
 import com.iti.bago.deliveryapp.network.RetrofitApi
 import com.iti.bago.deliveryapp.network.ServiceBuilder
@@ -105,23 +106,27 @@ class LoginFragment : Fragment() {
                             val delObj = shared!!.getDeliveryObj(context!!)
                             var deliveryId = delObj!!.delivery.id
 
-//                            val service2 = ServiceBuilder.RetrofitManager.getInstance()?.create(RetrofitApi::class.java)
-//                            val call2: Call<FireBase_Obj>? = service2?.postFirebaseToken(deliveryId, firetoken!!)
-//                            call2?.enqueue(object : Callback<FireBase_Obj> {
-//
-//                                override fun onResponse(call: Call<FireBase_Obj>, response: Response<FireBase_Obj>) {
-//                                    if (response.isSuccessful) {
-//                                        val obj2 = response.body()!!
-//                                        Log.i("token", obj2.driver_token)
-//
-//                                    } else {
-//                                        Toast.makeText(context, "Failed send token", Toast.LENGTH_SHORT).show()
-//                                    }
-//                                }
-//                                override fun onFailure(call: Call<FireBase_Obj>, t: Throwable) {
-//                                    Toast.makeText(context, "Failed to connect server ", Toast.LENGTH_SHORT).show()
-//                                }
-//                            })
+                            shared!!.setIsLoggedIn(true, context1)
+
+                            val service2 = ServiceBuilder.RetrofitManager.getInstance()?.create(RetrofitApi::class.java)
+                            val call2: Call<Firebase_Response>? = service2?.postFirebaseToken(FireBase_Obj(deliveryId, firetoken!!))
+                            call2?.enqueue(object : Callback<Firebase_Response> {
+
+                                override fun onResponse(call: Call<Firebase_Response>, response: Response<Firebase_Response>) {
+                                    if (response.isSuccessful) {
+                                        val obj2 = response.body()!!
+//                                        var delId = obj2.delivery_id
+//                                        var deltoken = obj2.token
+//                                        var delupdate = obj2.updated_at
+//                                        var delD = obj2.id
+                                    } else {
+                                        Toast.makeText(context, "Failed send token", Toast.LENGTH_SHORT).show()
+                                    }
+                                }
+                                override fun onFailure(call: Call<Firebase_Response>, t: Throwable) {
+                                    Toast.makeText(context, "Failed to connect server ", Toast.LENGTH_SHORT).show()
+                                }
+                            })
 
                             val intent = Intent()
                             intent.setClass(activity!!, MainActivity::class.java)

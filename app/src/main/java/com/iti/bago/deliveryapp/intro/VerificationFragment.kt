@@ -68,6 +68,7 @@ class VerificationFragment : Fragment() {
 
         done.setOnClickListener {
 //            val intent = Intent()
+//
 //            intent.setClass(activity!!, MainActivity::class.java)
 //            activity!!.startActivity(intent)
             sendSMs()

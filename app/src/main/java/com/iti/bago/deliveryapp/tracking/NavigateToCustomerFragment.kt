@@ -117,6 +117,13 @@ class NavigateToCustomerFragment : Fragment() ,OnMapReadyCallback, TaskLoadedCal
         super.onViewCreated(view, savedInstanceState)
         activity!!.title = "Navigate To Customer"
 
+        offline.setBackgroundColor(resources.getColor(R.color.colorPrimary))
+        offline.isClickable=false
+        offline.isEnabled=false
+        available.setBackgroundColor(resources.getColor(R.color.colorPrimary))
+        available.isClickable=false
+        available.isEnabled=false
+
         var fragment: Fragment?
 
         val arguments = arguments
@@ -161,8 +168,11 @@ class NavigateToCustomerFragment : Fragment() ,OnMapReadyCallback, TaskLoadedCal
         busy.setOnClickListener{
             it.setBackgroundColor(resources.getColor(R.color.colorAccent))
             offline.setBackgroundColor(resources.getColor(R.color.colorPrimary))
+            offline.isClickable=false
+            offline.isEnabled=false
             available.setBackgroundColor(resources.getColor(R.color.colorPrimary))
-            it.isClickable = false
+            available.isClickable=false
+            available.isEnabled=false
         }
 
         confirm_delivered.setOnClickListener{

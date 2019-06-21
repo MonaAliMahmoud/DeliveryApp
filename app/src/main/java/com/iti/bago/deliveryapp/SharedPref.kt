@@ -30,6 +30,24 @@ class SharedPref {
         return obj
     }
 
+    fun getIsLoggedIn(context: Context):Boolean{
+        val prefs = PreferenceManager.getDefaultSharedPreferences(context)
+        val gson = Gson()
+        val json = prefs.getBoolean("Logged", false)
+//        var obj = false
+//        if (json!=null) {
+//            obj = true
+//        }
+        return json
+    }
+
+    fun setIsLoggedIn(log: Boolean, context: Context) {
+        val prefs = PreferenceManager.getDefaultSharedPreferences(context)
+        val prefsEditor = prefs.edit()
+        prefsEditor.putBoolean("Logged", log!!)
+        prefsEditor.apply()
+    }
+
     fun setFirebaseToken(token :String?, context: Context) {
         val prefs = PreferenceManager.getDefaultSharedPreferences(context)
         val prefsEditor = prefs.edit()

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+          xmlns:app="http://schemas.android.com/apk/res-auto"
+          xmlns:tools="http://schemas.android.com/tools"
           package="com.iti.bago.deliveryapp">
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
@@ -19,6 +20,8 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             app:backgroundTint="@color/colorWhite">
+        <activity android:name=".menu.OnboardingActivity">
+        </activity>
         <!-- <service -->
         <!-- android:name=".firebase.FirebaseService" -->
         <!-- android:enabled="true" -->

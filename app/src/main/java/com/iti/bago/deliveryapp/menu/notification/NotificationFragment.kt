@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.iti.bago.deliveryapp.R
 import com.iti.bago.deliveryapp.network.RetrofitApi
 import com.iti.bago.deliveryapp.network.ServiceBuilder
@@ -40,7 +41,7 @@ class NotificationFragment : Fragment() {
     private var layoutManager: androidx.recyclerview.widget.RecyclerView.LayoutManager? = null
     private var adapter: androidx.recyclerview.widget.RecyclerView.Adapter<NotificationAdapter.ViewHolder>? = null
 
-    var orderList: ArrayList<Orders>? = null
+    var orderList =  ArrayList<Orders>()
 
     var emptylayoutFlag : Boolean = true
 
@@ -70,14 +71,14 @@ class NotificationFragment : Fragment() {
 
             override fun onResponse(call: Call<ArrayList<Orders>>, response: Response<ArrayList<Orders>>) {
                 if (response.isSuccessful) {
-                    orderList = response.body()
-                    layoutManager = androidx.recyclerview.widget.LinearLayoutManager(activity!!.applicationContext)
+                    orderList = response.body()!!
+                    layoutManager = LinearLayoutManager(activity!!.applicationContext)
                     notification_recycle!!.layoutManager = layoutManager
                     notification_recycle!!.itemAnimator = androidx.recyclerview.widget.DefaultItemAnimator()
-                    adapter = NotificationAdapter(orderList!!)
+                    adapter = NotificationAdapter(orderList)
                     notification_recycle!!.adapter = adapter
 
-                    Toast.makeText(context, "Successfully Added", Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(context, "Successfully Added", Toast.LENGTH_SHORT).show()
 //                    }
 //                    else{
 //                        emptynotifyFrame.visibility = View.VISIBLE

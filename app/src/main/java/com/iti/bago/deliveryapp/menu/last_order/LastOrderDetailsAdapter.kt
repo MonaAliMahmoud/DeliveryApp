@@ -45,7 +45,8 @@ class LastOrderDetailsAdapter (product: ArrayList<Products>): RecyclerView.Adapt
 
         viewHolder.itemName.text = product.product_name
         viewHolder.itemquan.text = "${product.units_no.toString()}"+"${product.price_after}"
-
+//        viewHolder.itemImg.visibility= View.GONE
+//        viewHolder.itemImg.resources(R.drawable.orderitem)
 //        if (product.photo != "") {
 //            Glide.with(this.mcontext)
 //                .load(item.photo)

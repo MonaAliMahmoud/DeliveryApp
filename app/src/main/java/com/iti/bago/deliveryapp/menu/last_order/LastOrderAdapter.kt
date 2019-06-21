@@ -60,8 +60,8 @@ class LastOrderAdapter(lastOrders: ArrayList<LastOrders>, context: Context): Rec
                 arguments.putString("payment_type", order.payment_type)
                 arguments.putString("customer_address", order.customer_address)
                 arguments.putString("created_at", order.created_at)
-                arguments.putSerializable("product", product)
-                fragment = CurrentOrderFragment()
+                arguments.putSerializable("products", product)
+                fragment = LastOrderDetailsFragment()
                 fragment.setArguments(arguments)
                 val frgMng: FragmentManager = activity.supportFragmentManager
                 val frgTran = frgMng.beginTransaction()

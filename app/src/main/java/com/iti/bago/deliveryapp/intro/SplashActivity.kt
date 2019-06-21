@@ -1,12 +1,16 @@
 package com.iti.bago.deliveryapp.intro
 
+import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.PersistableBundle
 import androidx.core.app.ActivityCompat
+import com.iti.bago.deliveryapp.MainActivity
 import com.iti.bago.deliveryapp.R
+import com.iti.bago.deliveryapp.SharedPref
 
 class SplashActivity : AppCompatActivity() {
 
@@ -24,41 +28,23 @@ class SplashActivity : AppCompatActivity() {
             )
         }
 
-//        var pref : SharedPref? =null
-//        pref=SharedPref()
-//
-//        val isFirstRun =pref?.getIsFirst()
+        var pref : SharedPref? =SharedPref()
 
-
-//
-//        val isFirstRun = getSharedPreferences("PREFERENCE", Context.MODE_PRIVATE)
-//            .getBoolean("isFirstRun", true)
+        val isFirstRun = pref?.getIsLoggedIn(this)
 
         Handler().postDelayed({
             // This method will be executed once the timer is over
             // Start your app main activity
 
-//            if (isFirstRun!!) {
-//                //show start activity
-//
-//                getSharedPreferences("PREFERENCE", Context.MODE_PRIVATE).edit()
-//                    .putBoolean("isFirstRun", false).apply()
-//                pref.setFirst(false)
-//                startActivity(Intent(this, MainActivity::class.java))
-////                Toast.makeText(this, "First Run", Toast.LENGTH_LONG)
-////                    .show()
-//            }else{
-//                startActivity(Intent(this, MainActivity::class.java))
-//
-                // close this activity
-//                finish()
-
-            val loginFragment = LoginFragment()
-            val fragmentTransaction = supportFragmentManager.beginTransaction()
-            fragmentTransaction.add(R.id.intro_frame, loginFragment)
-            fragmentTransaction.commitAllowingStateLoss()
-
-//            startActivity(Intent(this, LoginActivity::class.java))
+            if (isFirstRun!!) {
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
+            }else {
+                val loginFragment = LoginFragment()
+                val fragmentTransaction = supportFragmentManager.beginTransaction()
+                fragmentTransaction.add(R.id.intro_frame, loginFragment)
+                fragmentTransaction.commitAllowingStateLoss()
+            }
 
         }, SPLASH_TIME_OUT)
     }

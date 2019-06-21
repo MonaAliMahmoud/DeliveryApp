@@ -18,7 +18,7 @@ class NotificationAdapter(orders: ArrayList<Orders>) : RecyclerView.Adapter<Noti
     private var orders: ArrayList<Orders>? = orders
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
+        var f = 1
         var marketAddress: TextView
         var marketName: TextView
         var customerAddress: TextView
@@ -38,6 +38,7 @@ class NotificationAdapter(orders: ArrayList<Orders>) : RecyclerView.Adapter<Noti
                 val order = orders!![position]
                 val cust = order.customer[0]
                 val item = order.item_order
+                arguments.putInt("flag", f)
                 arguments.putString("supermarket_name", order.supermarket_name)
                 arguments.putString("supermarket_address", order.supermarket_address)
                 arguments.putString("customer_address", cust.address)

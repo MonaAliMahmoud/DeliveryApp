@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             fragmentTransaction.commit()
         }
 
-        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        val toolbar: Toolbar = this.findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
@@ -132,8 +132,19 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
+        var fragment : Fragment? = null
+
         return when (item.itemId) {
-            R.id.action_settings -> true
+            R.id.action_settings -> {
+                fragment = NotificationFragment()
+                if (fragment != null){
+                    val frgMng = supportFragmentManager
+                    val frgTran = frgMng!!.beginTransaction()
+                    frgTran.replace(R.id.content_frame, fragment).addToBackStack(null).commit()
+                }
+
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }

@@ -131,7 +131,6 @@ class HomeFragment : Fragment(), OnMapReadyCallback, LocationListener, GoogleApi
         var fragment: Fragment?
 
         val delObj = pref!!.getDeliveryObj(context!!)
-        var nameDel = delObj!!.delivery.name
 
         available.setBackgroundColor(resources.getColor(R.color.colorAccent))
         busy.setBackgroundColor(resources.getColor(R.color.colorPrimary))
@@ -141,18 +140,6 @@ class HomeFragment : Fragment(), OnMapReadyCallback, LocationListener, GoogleApi
             it.setBackgroundColor(resources.getColor(R.color.colorAccent))
             busy.setBackgroundColor(resources.getColor(R.color.colorPrimary))
             available.setBackgroundColor(resources.getColor(R.color.colorPrimary))
-//            val builder = AlertDialog.Builder(activity!!)
-//            builder.setMessage("You are Offline Return Available to receive Orders")
-//            //builder.setPositiveButton("OK", DialogInterface.OnClickListener(function = x))
-//            builder.setPositiveButton(android.R.string.yes) { _, _ ->
-//                Toast.makeText(activity!!,
-//                    android.R.string.yes, Toast.LENGTH_SHORT).show()
-//            }
-//            builder.setNegativeButton(android.R.string.no) { _, _ ->
-//                Toast.makeText(activity!!,
-//                    android.R.string.no, Toast.LENGTH_SHORT).show()
-//            }
-//            builder.show()
 
             val mDialogView = LayoutInflater.from(context).inflate(R.layout.offline_dialog, null)
             //AlertDialogBuilder

@@ -34,10 +34,10 @@
                 android:title="Settings"/>
         <View android:layout_width="match_parent" android:layout_height="1dp"
               android:background="@color/colorPrimary"/>
-        <item
-                android:id="@+id/tutorials"
-                android:icon="@drawable/tutorials"
-                android:title="Tutorials"/>
+        <!--<item-->
+                <!--android:id="@+id/tutorials"-->
+                <!--android:icon="@drawable/tutorials"-->
+                <!--android:title="Tutorials"/>-->
     </group>
 
     <!--<item android:title="Communicate">-->

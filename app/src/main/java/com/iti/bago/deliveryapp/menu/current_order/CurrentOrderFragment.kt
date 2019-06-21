@@ -8,10 +8,21 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.iti.bago.deliveryapp.R
+import com.iti.bago.deliveryapp.SharedPref
+import com.iti.bago.deliveryapp.menu.last_order.LastOrderAdapter
+import com.iti.bago.deliveryapp.network.RetrofitApi
+import com.iti.bago.deliveryapp.network.ServiceBuilder
 import com.iti.bago.deliveryapp.pojo.ItemOrder
+import com.iti.bago.deliveryapp.pojo.DeliveryApi
 import com.iti.bago.deliveryapp.tracking.BusyFragment
 import kotlinx.android.synthetic.main.fragment_current_order.*
+import kotlinx.android.synthetic.main.fragment_last_orders.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -38,7 +49,9 @@ class CurrentOrderFragment : Fragment() {
     private var adapter: androidx.recyclerview.widget.RecyclerView.Adapter<ItemOrderAdapter.ViewHolder>? = null
 
     var itemList: ArrayList<ItemOrder>? = null
+    var delivobj: DeliveryApi = DeliveryApi()
 
+    var pref: SharedPref = SharedPref()
     var supermarketAddress: String? = ""
     var supermarketName: String? = ""
     var customerAddress: String? = ""
@@ -65,9 +78,23 @@ class CurrentOrderFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         activity!!.title = "CURRENT ORDER"
 
+
+
         val arguments = arguments
+        var flag = 0
+
+        if(flag == 0 && arguments == null){
+            val mDialogView = LayoutInflater.from(context).inflate(R.layout.not_register, null)
+            //AlertDialogBuilder
+            val mBuilder = AlertDialog.Builder(context!!)
+                .setView(mDialogView)
+            //show dialog
+            val  mAlertDialog = mBuilder.show()
+            flag = 1
+        }
 
         if(arguments != null) {
+
             supermarketName = arguments.getString("supermarket_name")
             supermarketAddress = arguments.getString("supermarket_address")
             customerAddress = arguments.getString("customer_address")
@@ -109,6 +136,28 @@ class CurrentOrderFragment : Fragment() {
             arguments.putString("customer_phone_number", customerPhone)
             arguments.putString("customer_name", customerName)
             arguments.putString("customer_address", customerAddress)
+
+            val delObj = pref.getDeliveryObj(context!!)
+            var delivid = delObj!!.delivery.id
+            var delivStatus = delObj.delivery.status
+            delivStatus = "Busy"
+            val service = ServiceBuilder.RetrofitManager.getInstance()?.create(RetrofitApi::class.java)
+            val call: Call<String>? = service?.changeStatus(delivStatus, delivid)
+            call?.enqueue(object : Callback<String> {
+
+                override fun onResponse(call: Call<String>, response: Response<String>) {
+                    if (response.isSuccessful) {
+
+                        Toast.makeText(context, "Update Successfully: Busy", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(context, "Failed to add item", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                override fun onFailure(call: Call<String>, t: Throwable) {
+                    Toast.makeText(context, "Failed to connect server", Toast.LENGTH_SHORT).show()
+                }
+            })
 
             fragment = BusyFragment()
             fragment.setArguments(arguments)
